@@ -16,6 +16,7 @@ CREATE TABLE quizzes (
   date DATE NOT NULL
 );
 
+<<<<<<< HEAD
 CREATE TABLE questions (
   id SERIAL PRIMARY KEY NOT NULL,
   quiz_id INTEGER REFERENCES quizzes(id),
@@ -39,3 +40,7 @@ CREATE TABLE ratings (
   quiz_attempts_id INTEGER REFERENCES quiz_attempts(id),
   rating INTEGER
 );
+=======
+
+
+>>>>>>> feature/home-page
