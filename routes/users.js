@@ -27,6 +27,10 @@ module.exports = (db) => {
     res.render("user_login");
   });
 
+  router.get("/register", (req, res) => {
+    res.render("user_register");
+  });
+
 
 
   return router;
