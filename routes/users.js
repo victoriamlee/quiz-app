@@ -34,29 +34,24 @@ module.exports = (db) => {
     WHERE email = $1;
     `, [email])
     .then(res => res.rows[0])
-  }
+  };
+
+
 
   router.post("/login", (req, res) => {
-    const user = req.body
-    const email = user.email;
-    const password = user.password;
-    if (email && password) {
-      return db.query(`
-      SELECT *
-      FROM users
-      WHERE email = $1 AND password = $2;
-      `, [email,password])
-      .then(() => {
-        req.session.userId = user.id;
-        res.send({user: {name: user.name, email: user.email, id: user.id}});
-        response.redirect('/');
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-    }
+    const email = req.body.email;
+    return emailExist(email)
+      .then(user => {
+          if (req.body.password !== user.password) {
+          res.send({error: "incorrect password"})
+        } else {
+          res.redirect('/api/widgets/quizzes')
+        }
+        })
+        .catch(err => {
+          res.send({error: "email does not exist"});
+        });
+
   })
 
   router.get("/register", (req, res) => {
@@ -68,25 +63,50 @@ module.exports = (db) => {
     const name = user.name;
     const email = user.email;
     const password = user.password;
-    if (!emailExist) {
-      return db.query(`
-      INSERT INTO users (name, email, password)
-      VALUES ($1,$2,$3);
-      `, [name,email,password])
-      .then(() => {
-        res.redirect('/api/widgets/quizzes');
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-    } else {
-      res.send({error: "email already exists"});
-      return;
-    }
-  })
 
+    console.log(emailExist(email))
+    if (emailExist(email) === null) {
+        // DOESN'T WORK
+        return db.query(`
+        INSERT INTO users (name, email, password)
+        VALUES ($1,$2,$3);
+        `, [name,email,password])
+        .then(() => {
+            //DOESN'T WORK
+            res.redirect('/api/widgets/quizzes');
+          })
+          .catch(err => {
+              res
+                .status(500)
+                .json({ error: err.message });
+            });
+          } else {
+              //WORKS
+              res.send({error: "email already exists"});
+              return;
+            }
+          })
+
+
+
+
+
+
+          //   console.log(emailExist(email))
+          //   return emailExist(email)
+
+          //   .then(() => {
+          //     res.send({error: "email already exists"});
+          //     return;
+          //   })
+          //   .catch(() => {
+          //     db.query(`
+          //     INSERT INTO users (name, email, password)
+          //     VALUES ($1,$2,$3);
+          //     `, [name,email,password])
+          //     res.redirect('/api/widgets/quizzes');
+          //   })
+          // })
 
   return router;
 };
