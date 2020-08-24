@@ -14,10 +14,6 @@ module.exports = (db) => {
   });
 
 
-  // router.get("/register", (req, res) => {
-  //   res.render("user_register");
-  // });
-
   const emailExist = function(email) {
     return db.query(`
     SELECT *
@@ -28,9 +24,7 @@ module.exports = (db) => {
   };
 
 
-
-
-  router.post("/register", (req, res) => {
+  router.post("/", (req, res) => {
     const user = req.body
     const name = user.name;
     const email = user.email;
@@ -38,22 +32,25 @@ module.exports = (db) => {
 
     // console.log(emailExist(email))
     return emailExist(email)
-    .then(() => {
-      res.send({error: "email already exists"});
+    .then(user => {
+      if (user) {
+        res.send({error: "email already exists"});
+      } else {
+        return db.query(`
+        INSERT INTO users (name, email, password)
+        VALUES ($1,$2,$3)
+        RETURNING *;
+        `, [name,email,password])
+        .then((result) => {
+          req.session.user_id = result.rows[0].id;
+          res.redirect('/api/widgets/quizzes')
+        });
+      }
     })
     .catch(() => {
-      return db.query(`
-      INSERT INTO users (name, email, password)
-      VALUES ($1,$2,$3);
-      `, [name,email,password])
-      .then(() => {res.redirect('/api/widgets/quizzes');
-    });
+
     })
   })
-
-
-
-
 
 
 
