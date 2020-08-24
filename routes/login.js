@@ -13,11 +13,6 @@ module.exports = (db) => {
     res.render("user_login");
   });
 
-
-  // router.get("/login", (req, res) => {
-  //   res.render("user_login");
-  // });
-
   const emailExist = function(email) {
     return db.query(`
     SELECT *
@@ -27,15 +22,15 @@ module.exports = (db) => {
     .then(res => res.rows[0])
   };
 
-
-  router.post("/login", (req, res) => {
+  router.post("/", (req, res) => {
     const email = req.body.email;
     return emailExist(email)
       .then(user => {
           if (req.body.password !== user.password) {
           res.send({error: "incorrect password"})
         } else {
-          res.redirect('/api/widgets/quizzes')
+          req.session.user_id = user.id;
+          res.redirect('/api/widgets/quizzes');
         }
         })
         .catch(err => {
