@@ -27,10 +27,6 @@ module.exports = (db) => {
     res.render("user_login");
   });
 
-  router.get("/register", (req, res) => {
-    res.render("user_register");
-  });
-
   const emailExist = function(email) {
     return db.query(`
     SELECT *
@@ -62,6 +58,10 @@ module.exports = (db) => {
       });
     }
   })
+
+  router.get("/register", (req, res) => {
+    res.render("user_register");
+  });
 
   router.post("/register", (req, res) => {
     const user = req.body
