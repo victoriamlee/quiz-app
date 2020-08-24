@@ -21,5 +21,24 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
+// Display the login form if not logged in else redirect to '/urls' if logged in
+  router.get("/login", (req,res) => {
+    // const currentUser = req.session.user_id;
+    // if (!users[currentUser]) {
+    //   const templateVars = {user: users[currentUser]};
+    //   res.render("user_login", templateVars);
+    // } else {
+    //   res.redirect('/urls');
+    // }
+
+    //res.send("user_login");
+    res.redirect('/');
+
+  });
+
+
+
   return router;
 };
