@@ -76,10 +76,6 @@ app.get("/", (req, res) => {
         let templateVars = {quizObj};
 
         if (req.session.user_id) {
-          // quizObj.user = req.session;
-          // console.log("******",req.session.user_id);
-          // userObj = req.session;
-          // console.log(userObj)
           templateVars.user = req.session.user_id;
         } else {
           templateVars.user = "";
