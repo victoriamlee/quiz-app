@@ -50,13 +50,14 @@
         </tr>
       </thead>
       <tbody>
+        <% for(let item in quizObj) { %>
         <tr>
-          <td>Quiz1</td>
-          <td>Quiz1 Description</td>
-          <td><a href="https://www.w3schools.com/">Visit W3Schools.com!</a></td>
-        </tr>
+          <td><%= quizObj[item].name %></td>
+          <td><%= quizObj[item].description %></td>
+          <td><a href="<%= quizObj[item].url %>"</a>Link</td>
+        </tr
+        <% } %>
       </tbody>
-
     </table>
   </main>
   <!-- Bootstrap JS -->
