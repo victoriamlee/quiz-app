@@ -43,6 +43,7 @@ const widgetsRoutes = require("./routes/widgets");
 const registerRoute = require("./routes/register");
 const loginRoute = require("./routes/login");
 const logoutRoute = require("./routes/logout");
+const quizzesRoute = require("./routes/quiz");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -52,6 +53,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/register", registerRoute(db));
 app.use("/login", loginRoute(db));
 app.use("/logout", logoutRoute(db));
+app.use("/quizzes/:id", quizzesRoute(db));
 
 
 // Home page

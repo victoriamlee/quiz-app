@@ -26,7 +26,7 @@ module.exports = (db) => {
           res.send({error: "incorrect password"})
         } else {
           req.session.user_id = user.id;
-          res.redirect('/api/widgets/quizzes');
+          res.redirect('/');
         }
       } else {
         res.send({error: "email does not exist"});
