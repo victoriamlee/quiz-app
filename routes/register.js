@@ -3,7 +3,13 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.render("user_register")
+    let templateVars = {};
+    if (req.session.user_id) {
+      templateVars.user = req.session.user_id;
+    } else {
+      templateVars.user = "";
+    }
+    res.render("user_register", templateVars);
   });
 
 
@@ -36,7 +42,7 @@ module.exports = (db) => {
         `, [name,email,password])
         .then((result) => {
           req.session.user_id = result.rows[0].id;
-          res.redirect('/api/widgets/quizzes')
+          res.redirect('/')
         });
       }
     })
