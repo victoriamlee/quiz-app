@@ -4,7 +4,13 @@ const bcrypt = require('bcrypt');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.render("user_login");
+    let templateVars = {};
+    if (req.session.user_id) {
+      templateVars.user = req.session.user_id;
+    } else {
+      templateVars.user = "";
+    }
+    res.render("user_login", templateVars);
   });
 
   const emailExist = function(email) {
