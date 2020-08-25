@@ -53,7 +53,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/register", registerRoute(db));
 app.use("/login", loginRoute(db));
 app.use("/logout", logoutRoute(db));
-app.use("/quizzes/:id", quizzesRoute(db));
+app.use("/quizzes", quizzesRoute(db));
 
 
 // Home page
@@ -63,7 +63,7 @@ app.use("/quizzes/:id", quizzesRoute(db));
 app.get("/", (req, res) => {
 
   const str1 = `${PORT}`;
-  const str2 = "http://localhost:" + str1 + "/quizzes/:";
+  const str2 = "http://localhost:" + str1 + "/quizzes/";
 
   let query = `SELECT name, description, ('${str2}' || id) as quiz_url FROM quizzes;`;
 
