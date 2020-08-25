@@ -1,0 +1,68 @@
+
+#blink-text{
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 800;
+  height: 80px;
+  padding: 10px;
+  color: #8ebf42;
+  font-family: sans-serif;
+}
+
+.blinking{
+  animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+  0%{     color: #000;    }
+  49%{    color: blue; }
+  60%{    color: red; }
+  99%{    color:transparent;  }
+  100%{   color: #000;    }
+}
+
+
+
+#demobox {
+  display: flex;
+  align-content: space-between;
+  width: auto;
+  height: 150px;
+  background-color: white;
+}
+
+
+#m1,#m2,#m3,#m4,#m5,#m6,#m7,#m8,#m9 {
+  display: flex;
+  align-self: auto;
+  flex-basis: auto;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-variant: small-caps;
+  font-weight: 900;
+  font-size: 18pt;
+  color: red;
+  height: 150px;
+  animation-name: example;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+  0%   {color: red;}
+  25%  {color: orange;}
+  50%  {color: yellow;}
+  75%  {color: blue;}
+  100% {color: green;}
+}
+
+
+h3 {
+  padding: 10px;
+  font-weight: 900;
+}
+
+table, th, td {
+  background-color: #f1f1c1;
+}
+
+
