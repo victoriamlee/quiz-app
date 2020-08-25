@@ -27,7 +27,7 @@ module.exports = (db) => {
   //   })
   // })
 
-  router.get("/", (req, res) => {
+  router.get("/:id", (req, res) => {
     console.log(req.params.id)
     return db.query(`
     SELECT questions.*, quizzes.name
@@ -35,9 +35,15 @@ module.exports = (db) => {
     JOIN quizzes ON quizzes.id = quiz_id
     WHERE quiz_id = $1;
     `, [req.params.id])
-    .then(res => {
-      const quiz = res.rows[0];
-      const templateVars = {quiz};
+    .then(result => {
+      let quiz = result.rows;
+      let questionsObj = {};
+      for (let i = 0; i < quiz.length; i++) {
+        questionsObj[i] = { name: quiz[i].name, question: quiz[i].question, answer: quiz[i].answer };
+      }
+      // console.log("QUIZ: ", quiz)
+      let templateVars = { questionsObj };
+      // console.log("TEMPLATE: ", templateVars)
 
       if (req.session.user_id) {
         templateVars.user = req.session.user_id;
