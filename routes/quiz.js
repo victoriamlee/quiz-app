@@ -28,15 +28,23 @@ module.exports = (db) => {
   // })
 
   router.get("/", (req, res) => {
-    // console.log(req)
+    console.log(req.params.id)
     return db.query(`
-    SELECT *
+    SELECT questions.*, quizzes.name
     FROM questions
+    JOIN quizzes ON quizzes.id = quiz_id
     WHERE quiz_id = $1;
-    `, [quizzes.id])
+    `, [req.params.id])
     .then(res => {
       const quiz = res.rows[0];
-      const templateVars = {};
+      const templateVars = {quiz};
+
+      if (req.session.user_id) {
+        templateVars.user = req.session.user_id;
+      } else {
+        templateVars.user = "";
+      }
+
       res.render("quiz_page", templateVars)
     })
     .catch(err => {
