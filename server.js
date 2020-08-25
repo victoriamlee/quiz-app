@@ -44,6 +44,7 @@ const registerRoute = require("./routes/register");
 const loginRoute = require("./routes/login");
 const logoutRoute = require("./routes/logout");
 const quizzesRoute = require("./routes/quiz");
+const resultsRoute = require("./routes/results-page");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -53,7 +54,9 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/register", registerRoute(db));
 app.use("/login", loginRoute(db));
 app.use("/logout", logoutRoute(db));
-app.use("/quizzes/:id", quizzesRoute(db));
+app.use("/quizzes", quizzesRoute(db));
+//app.use("/quizzes/:id/results", resultsRoute(db));
+app.use("/results", resultsRoute(db));
 
 
 // Home page
@@ -63,7 +66,7 @@ app.use("/quizzes/:id", quizzesRoute(db));
 app.get("/", (req, res) => {
 
   const str1 = `${PORT}`;
-  const str2 = "http://localhost:" + str1 + "/quizzes/:";
+  const str2 = "http://localhost:" + str1 + "/quizzes/";
 
   let query = `SELECT name, description, ('${str2}' || id) as quiz_url FROM quizzes;`;
 
