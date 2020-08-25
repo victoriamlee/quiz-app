@@ -68,7 +68,6 @@ app.get("/", (req, res) => {
         const widgets = data.rows;
 
         let quizObj = {};
-        // let userObj = {};
         for (let i = 0; i < widgets.length; i++) {
           quizObj[i] = {name: widgets[i].name, description: widgets[i].description, url: widgets[i].photo_url};
         }
@@ -76,21 +75,10 @@ app.get("/", (req, res) => {
         let templateVars = {quizObj};
 
         if (req.session.user_id) {
-          // quizObj.user = req.session;
-          // console.log("******",req.session.user_id);
-          // userObj = req.session;
-          // console.log(userObj)
           templateVars.user = req.session.user_id;
         } else {
           templateVars.user = "";
         }
-
-
-        // let templateVars = {quizObj, userObj};
-        console.log("TEMPLATE", templateVars);
-        // console.log("user*********",userObj.user_id);
-
-        // let templateVars = {quizObj};
         res.render("index", templateVars);
       })
       .catch(err => {
