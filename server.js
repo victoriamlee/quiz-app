@@ -62,14 +62,18 @@ app.use("/quizzes/:id", quizzesRoute(db));
 
 app.get("/", (req, res) => {
 
-  let query = `SELECT name, description, photo_url FROM quizzes;`;
+  const str1 = `${PORT}`;
+  const str2 = "http://localhost:" + str1 + "/quizzes/:";
+
+  let query = `SELECT name, description, ('${str2}' || id) as quiz_url FROM quizzes;`;
+
   db.query(query)
       .then(data => {
         const widgets = data.rows;
 
         let quizObj = {};
         for (let i = 0; i < widgets.length; i++) {
-          quizObj[i] = {name: widgets[i].name, description: widgets[i].description, url: widgets[i].photo_url};
+          quizObj[i] = {name: widgets[i].name, description: widgets[i].description, url: widgets[i].quiz_url};
         }
 
         let templateVars = {quizObj};
