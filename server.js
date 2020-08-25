@@ -42,6 +42,7 @@ const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const registerRoute = require("./routes/register");
 const loginRoute = require("./routes/login");
+// const homepageRoute = require("./routes/homepage");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -50,13 +51,32 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/register", registerRoute(db));
 app.use("/login", loginRoute(db));
-
+// app.use("/quizzes", homepageRoute(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+
 app.get("/", (req, res) => {
-  res.render("index");
+
+  let query = `SELECT name, description, photo_url FROM quizzes;`;
+  db.query(query)
+      .then(data => {
+        const widgets = data.rows;
+
+        const quizObj = {};
+        for (let i = 0; i < widgets.length; i++) {
+          quizObj[i] = {name : widgets[i].name, description: widgets[i].description, url: widgets[i].photo_url};
+        }
+
+        let templateVars = {quizObj};
+        res.render("index", templateVars);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
 });
 
 app.listen(PORT, () => {
