@@ -9,11 +9,16 @@
     <li class="nav-item">
       <a class="nav-link" href="/quizzes/new">Create New Quiz</a>
     </li>
+    <% if(user) { %>
+    <li class="nav-item">
+      <a class="nav-link" href="/quizzes/results">View Results</a>
+    </li>
+    <% } %>
   </ul>
   <% if(user) { %>
     <ul class="nav navbar-nav ml-auto">
       <form method="POST" action="/logout" class="form-inline">
-    <li><button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-user"></span> Logout</button></li>
+    <li><button type="submit" class="btn btn-outline-light"><span class="glyphicon glyphicon-user"></span> Logout</button></li>
   </form>
   </ul>
   <% } else { %>
