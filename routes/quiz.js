@@ -66,5 +66,38 @@ module.exports = (db) => {
       });
     });
   });
+
+
+
+
+
+
+  // router.post("/:id", (req, res) => {
+  //   return db.query(`
+  //       SELECT answers.answer, answers.correct, question_id
+  //       FROM questions
+  //       JOIN quizzes ON quizzes.id = quiz_id
+  //       JOIN answers ON questions.id = question_id
+  //       WHERE quiz_id = $1;
+  //     `, [req.params.id])
+  //   let i = 1;
+  //       for(let answer of req.body.answer) {
+  //         let flag = false;
+  //         if (i === parseInt(correct)) {
+  //           flag = true;
+  //         }
+  //         db.query(`
+  //         INSERT INTO answers (question_id, answer, correct)
+  //         VALUES ($1, $2, $3);
+  //         `, [questionID.id, answer, flag])
+  //         .then(() => console.log(`Quiz [ ${name} ] added to [ midterm ] database`))
+  //         .catch(e => console.error(e.stack))
+  //         i++;
+  //       }
+  // })
+
+
+
+
   return router;
 };
