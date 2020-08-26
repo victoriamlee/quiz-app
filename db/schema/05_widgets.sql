@@ -2,6 +2,7 @@
 
 DROP TABLE IF EXISTS quizzes CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
+DROP TABLE IF EXISTS answers CASCADE;
 DROP TABLE IF EXISTS quiz_attempts CASCADE;
 DROP TABLE IF EXISTS ratings CASCADE;
 
@@ -19,8 +20,14 @@ CREATE TABLE quizzes (
 CREATE TABLE questions (
   id SERIAL PRIMARY KEY NOT NULL,
   quiz_id INTEGER REFERENCES quizzes(id),
-  question TEXT,
-  answer TEXT
+  question TEXT
+);
+
+CREATE TABLE answers (
+  id SERIAL PRIMARY KEY NOT NULL,
+  question_id INTEGER REFERENCES questions(id),
+  answer TEXT,
+  correct BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE quiz_attempts (
