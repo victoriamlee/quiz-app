@@ -31,17 +31,12 @@ module.exports = (db) => {
   });
 
   //POST --- CREATE QUIZ
-  // function generateRandomString() {
-  //   return Math.random().toString(36).substring(2,8);
-  // }
-
   router.post("/quizzes/new", (req, res) => {
-    console.log(req.body);
+
     const name = req.body.name;
     const description = req.body.description;
     const question = req.body.question;
     const correct = req.body.correct;
-    console.log(name, description, question, correct);
 
     //Insert form elements into quiz table
     db.query(`
@@ -50,7 +45,6 @@ module.exports = (db) => {
     RETURNING id;
     `, [1, name, description,'somePhotoURL', true, '2020-01-11'])
     .then(res => {
-      console.log('THEN -->', res.rows[0])
       //Insert form elements and returned quizID into questions table
       const quizID = res.rows[0];
       db.query(`
@@ -59,7 +53,6 @@ module.exports = (db) => {
       RETURNING id;
       `, [quizID.id, question])
       .then(res => {
-        console.log('THEN -->', res.rows[0])
         const questionID = res.rows[0];
         //Iterate through answer array to create insert query
         //Pass true if radio button value (correct) equals index of answer in array
@@ -68,19 +61,15 @@ module.exports = (db) => {
           let flag = false;
           if (i === parseInt(correct)) {
             flag = true;
-            console.log('FLAGGED ','i --->', i, 'correct --->', correct)
           }
-
           db.query(`
           INSERT INTO answers (question_id, answer, correct)
           VALUES ($1, $2, $3);
           `, [questionID.id, answer, flag])
-          .then(res => console.log('THEN -->', res.rows[0]))
+          .then(() => console.log(`Quiz [ ${name} ] added to [ midterm ] database`))
           .catch(e => console.error(e.stack))
-          console.log('i --->', i, 'correct --->', correct)
           i++;
         }
-
       })
       .catch(e => console.error(e.stack))
     })
