@@ -1,32 +1,48 @@
 -- Widgets table seeds here (Example)
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES (1, 'new quiz', 'fun', 'a new quiz', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, '2020-08-23');
+INSERT INTO quizzes (owner_id, name, description, photo_url, active, date) VALUES (1, 'New Quiz', 'testing new quiz', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, '2020-08-25');
 
-INSERT INTO questions (quiz_id, question, answer) VALUES (1, 'How old am I?', '25 years old');
-INSERT INTO questions (quiz_id, question, answer) VALUES (1, 'Whats my favourite food?', 'Sushi');
+INSERT INTO questions (quiz_id, question) VALUES (1, 'This is a Question');
+INSERT INTO questions (quiz_id, question) VALUES (1, 'How old am I?');
+INSERT INTO questions (quiz_id, question) VALUES (1, 'Whats my favourite food?');
 
+<<<<<<< HEAD
 INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '50', '2020-08-22', '2020-08-22T08:05:00.000Z', '2020-08-22T08:21:20.000Z');
 INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '60', '2020-08-23', '2020-08-23T08:05:00.000Z', '2020-08-23T08:21:20.000Z');
 INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '70', '2020-08-24', '2020-08-24T08:05:00.000Z', '2020-08-24T08:21:20.000Z');
 INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '80', '2020-08-25', '2020-08-25T08:05:00.000Z', '2020-08-25T08:21:20.000Z');
+=======
+INSERT INTO answers (question_id, answer, correct) VALUES (2, '25 years old', TRUE);
+INSERT INTO answers (question_id, answer, correct) VALUES (2, '24 years old', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (3, 'Sushi', TRUE);
+INSERT INTO answers (question_id, answer, correct) VALUES (3, 'Pasta', FALSE);
+>>>>>>> 9b4d2567d574aafce9e60bebf57c5753ce83aa9c
 
-INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 1, 3);
-INSERT INTO widgets (name, user_id) VALUES ('Sprockets', 1);
-INSERT INTO widgets (name, user_id) VALUES ('Chains', 2);
-INSERT INTO widgets (name, user_id) VALUES ('Bearings', 2);
+INSERT INTO answers (question_id, answer, correct) VALUES (1, 'This is the answer', true);
+INSERT INTO answers (question_id, answer, correct) VALUES (1, 'This is NOT the answer', false);
+INSERT INTO answers (question_id, answer, correct) VALUES (1, 'This is NOT the answer', false);
+INSERT INTO answers (question_id, answer, correct) VALUES (1, 'This is NOT the answer', false);
 
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Quiz - 1', 'Sports', 'Quiz about Sports','url', TRUE, now());
+-- INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 1, 3);
+-- INSERT INTO widgets (name, user_id) VALUES ('Sprockets', 1);
+-- INSERT INTO widgets (name, user_id) VALUES ('Chains', 2);
+-- INSERT INTO widgets (name, user_id) VALUES ('Bearings', 2);
 
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
-(2, 'Quiz - 2', 'javascript', 'Quiz about javascript','url', TRUE, now());
+-- INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
+-- (1, 'Quiz - 1', 'Sports', 'Quiz about Sports','url', TRUE, now());
 
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Quiz - 3', 'Politics', 'Quiz about Politics','url', TRUE, now());
+-- INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
+-- (2, 'Quiz - 2', 'javascript', 'Quiz about javascript','url', TRUE, now());
 
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
-(2, 'Quiz - 4', 'Films', 'Quiz about Films','url', TRUE, now());
+-- INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
+-- (1, 'Quiz - 3', 'Politics', 'Quiz about Politics','url', TRUE, now());
 
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Quiz - 5', 'Birds', 'Quiz about Birds','url', TRUE, now());
+-- INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
+-- (2, 'Quiz - 4', 'Films', 'Quiz about Films','url', TRUE, now());
 
+-- INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
+-- (1, 'Quiz - 5', 'Birds', 'Quiz about Birds','url', TRUE, now());
+
+-- INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '1/1', '2020-08-24', '2020-08-24T08:05:00.000Z', '2018-08-24T08:21:20.000Z');
+
+-- INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 1, 3);
 
