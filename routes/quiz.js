@@ -35,8 +35,10 @@ module.exports = (db) => {
         console.log("QUIZ", quiz);
         let questionsObj = {};
         let right = [];
+        let param_id = req.params.id
+        console.log("ADDED ID", questionsObj)
         for (let i = 0; i < quiz.length; i++) {
-          questionsObj[i] = { question: quiz[i].question }
+          questionsObj[i] = { quiz_id: param_id, question: quiz[i].question }
           for (let j = 0; j < answer.length; j++) {
             if (quiz[i].id === answer[j].question_id) {
               right.push(answer[j].answer)
@@ -47,6 +49,7 @@ module.exports = (db) => {
           } right = [];
         }
        console.log("OBJ", questionsObj)
+
         let templateVars = { questionsObj };
         console.log("TEMPLATE", templateVars);
 
@@ -72,29 +75,103 @@ module.exports = (db) => {
 
 
 
-  // router.post("/:id", (req, res) => {
-  //   return db.query(`
-  //       SELECT answers.answer, answers.correct, question_id
-  //       FROM questions
-  //       JOIN quizzes ON quizzes.id = quiz_id
-  //       JOIN answers ON questions.id = question_id
-  //       WHERE quiz_id = $1;
-  //     `, [req.params.id])
-  //   let i = 1;
-  //       for(let answer of req.body.answer) {
-  //         let flag = false;
-  //         if (i === parseInt(correct)) {
-  //           flag = true;
-  //         }
-  //         db.query(`
-  //         INSERT INTO answers (question_id, answer, correct)
-  //         VALUES ($1, $2, $3);
-  //         `, [questionID.id, answer, flag])
-  //         .then(() => console.log(`Quiz [ ${name} ] added to [ midterm ] database`))
-  //         .catch(e => console.error(e.stack))
-  //         i++;
-  //       }
-  // })
+  router.post("/:id/results", (req, res) => {
+    console.log(req.params.id)
+    return db.query(`
+        SELECT answers.answer, answers.correct, question_id
+        FROM questions
+        JOIN quizzes ON quizzes.id = quiz_id
+        JOIN answers ON questions.id = question_id
+        WHERE quiz_id = $1
+        ORDER BY question_id;
+      `, [req.params.id])
+      .then((results) => {
+        const working = results.rows;
+        let param_id = req.params.id
+        console.log("WORKING:", working)
+        // let i = 0;
+        console.log("REQ.BODY", req.body)
+        let arr = [];
+        let input = [];
+        for (let i = 0; i < working.length; i++) {
+          // console.log("IDK", working[i].question_id)
+          // console.log("ARRAY", arr)
+          for (let j = 0; j < working.length; j++) {
+            if (working[i].question_id === working[j].question_id) {
+              arr.push(working[j].correct)
+            }
+
+          }
+        }
+        for (let loop in req.body) {
+          // console.log(arr[req.body[loop]])
+          if (arr[req.body[loop]] === true) {
+            input.push(true);
+          } else {
+            input.push(false);
+          }
+          // console.log("INPUT INSIDE", input)
+        //   console.log("ARRAY", arr)
+        // arr = [];
+        }
+
+        console.log("INPUT", input)
+
+        let score = "";
+        let count = 0;
+        for (let num of input) {
+          if (num === true) {
+            count += 1;
+          }
+        }
+        score = `${count}/${input.length}`
+        console.log(score);
+        res.redirect(`/quizzes/${param_id}/results`)
+
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  })
+
+
+
+
+
+
+  router.get("/:id/results", (req, res) => {
+    return db.query(`
+      SELECT quiz_attempts.*, quizzes.*
+      FROM quiz_attempts
+      JOIN quizzes ON quiz_id = quizzes.id
+      WHERE quiz_attempts.user_id = $1 AND quiz_id = $2
+      ORDER BY quiz_attempts.end_time DESC;
+    `, [req.session.user_id, req.params.id])
+    .then(data => {
+      const queryData = data.rows;
+      let quizObj = {};
+        for (let i = 0; i < queryData.length; i++) {
+          quizObj[i] = {name: queryData[i].name, endTime: queryData[i].end_time, score: queryData[i].results};
+        }
+      let templateVars = {quizObj};
+
+      if (req.session.user_id) {
+        templateVars.user = req.session.user_id;
+      } else {
+        templateVars.user = "";
+      }
+
+      res.render("results", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
+
 
 
 
