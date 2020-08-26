@@ -5,17 +5,14 @@ INSERT INTO questions (quiz_id, question) VALUES (1, 'This is a Question');
 INSERT INTO questions (quiz_id, question) VALUES (1, 'How old am I?');
 INSERT INTO questions (quiz_id, question) VALUES (1, 'Whats my favourite food?');
 
-<<<<<<< HEAD
 INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '50', '2020-08-22', '2020-08-22T08:05:00.000Z', '2020-08-22T08:21:20.000Z');
 INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '60', '2020-08-23', '2020-08-23T08:05:00.000Z', '2020-08-23T08:21:20.000Z');
 INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '70', '2020-08-24', '2020-08-24T08:05:00.000Z', '2020-08-24T08:21:20.000Z');
 INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '80', '2020-08-25', '2020-08-25T08:05:00.000Z', '2020-08-25T08:21:20.000Z');
-=======
 INSERT INTO answers (question_id, answer, correct) VALUES (2, '25 years old', TRUE);
 INSERT INTO answers (question_id, answer, correct) VALUES (2, '24 years old', FALSE);
 INSERT INTO answers (question_id, answer, correct) VALUES (3, 'Sushi', TRUE);
 INSERT INTO answers (question_id, answer, correct) VALUES (3, 'Pasta', FALSE);
->>>>>>> 9b4d2567d574aafce9e60bebf57c5753ce83aa9c
 
 INSERT INTO answers (question_id, answer, correct) VALUES (1, 'This is the answer', true);
 INSERT INTO answers (question_id, answer, correct) VALUES (1, 'This is NOT the answer', false);
