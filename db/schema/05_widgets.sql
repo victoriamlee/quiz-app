@@ -1,10 +1,17 @@
 -- Drop and recreate Widgets table (Example)
 
 DROP TABLE IF EXISTS quizzes CASCADE;
-DROP TABLE IF EXISTS questions CASCADE;
 DROP TABLE IF EXISTS answers CASCADE;
+DROP TABLE IF EXISTS questions CASCADE;
 DROP TABLE IF EXISTS quiz_attempts CASCADE;
 DROP TABLE IF EXISTS ratings CASCADE;
+
+
+-- DROP TABLE IF EXISTS answers;
+-- DROP TABLE IF EXISTS questions;
+-- DROP TABLE IF EXISTS quiz_attempts;
+-- DROP TABLE IF EXISTS ratings;
+-- DROP TABLE IF EXISTS quizzes;
 
 CREATE TABLE quizzes (
   id SERIAL PRIMARY KEY NOT NULL,
