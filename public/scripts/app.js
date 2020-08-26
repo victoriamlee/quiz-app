@@ -1,9 +1,11 @@
 $(() => {
+  console.log("Ajax String");
   $.ajax({
-    method: "GET",
+    type: "GET",
     url: "/api/users"
   }).done((users) => {
-    for(user of users) {
+    console.log(users);
+    for(user of users.users) {
       $("<div>").text(user.name).appendTo($("body"));
     }
   });;

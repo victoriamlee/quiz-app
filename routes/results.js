@@ -11,7 +11,7 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    //console.log("Heloooooooooo");
+    console.log("Heloooooooooo");
     return db.query(`
       SELECT quiz_attempts.*, quizzes.*
       FROM quiz_attempts
