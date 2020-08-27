@@ -17,9 +17,9 @@ INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 4, 3);
 INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 5, 2);
 
 
-INSERT INTO widgets (name, user_id) VALUES ('Sprockets', 1);
-INSERT INTO widgets (name, user_id) VALUES ('Chains', 2);
-INSERT INTO widgets (name, user_id) VALUES ('Bearings', 2);
+-- INSERT INTO widgets (name, user_id) VALUES ('Sprockets', 1);
+-- INSERT INTO widgets (name, user_id) VALUES ('Chains', 2);
+-- INSERT INTO widgets (name, user_id) VALUES ('Bearings', 2);
 
 INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
 (1, 'Quiz - 1', 'Sports', 'Quiz about Sports','url', TRUE, now());
