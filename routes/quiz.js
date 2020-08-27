@@ -10,68 +10,6 @@ const router  = express.Router();
 
 module.exports = (db) => {
 
-
-  router.get("/:id", (req, res) => {
-    console.log(req.params.id)
-    return db.query(`
-    SELECT questions.question, questions.id
-    FROM questions
-    JOIN quizzes ON quizzes.id = quiz_id
-    WHERE quiz_id = $1;
-    `, [req.params.id])
-    .then(result => {
-      let quiz = result.rows;
-      console.log("QUIZ[0]", quiz[0].id)
-      return db.query(`
-        SELECT answers.answer, answers.correct, question_id
-        FROM questions
-        JOIN quizzes ON quizzes.id = quiz_id
-        JOIN answers ON questions.id = question_id
-        WHERE quiz_id = $1;
-      `, [req.params.id])
-     .then (answers => {
-        let answer = answers.rows;
-        console.log("answers",answer);
-        console.log("QUIZ", quiz);
-        let questionsObj = {};
-        let right = [];
-        let param_id = req.params.id
-        console.log("ADDED ID", questionsObj)
-        for (let i = 0; i < quiz.length; i++) {
-          questionsObj[i] = { quiz_id: param_id, question: quiz[i].question }
-          for (let j = 0; j < answer.length; j++) {
-            if (quiz[i].id === answer[j].question_id) {
-              right.push(answer[j].answer)
-              // right[j] = answer[j].answer
-              questionsObj[i].answer = right;
-              // console.log("OBJECT", questionsObj)
-            }
-          } right = [];
-        }
-       console.log("OBJ", questionsObj)
-
-        let templateVars = { questionsObj };
-        console.log("TEMPLATE", templateVars);
-
-        if (req.session.user_id) {
-          templateVars.user = req.session.user_id;
-        } else {
-          templateVars.user = "";
-        }
-
-        res.render("quiz_page", templateVars)
-      })
-
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-    });
-  });
-
-
-
   router.post("/results", (req, res) => {
     console.log(req.params.id)
     return db.query(`
@@ -139,9 +77,9 @@ module.exports = (db) => {
 
         return db.query(`
         INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time)
-        VALUES ($1,$2,$3,$4, '2020-08-24T08:05:00.000Z', $5);
+        VALUES ($1,$2,$3,$4, '2020-08-24T08:05:00.000Z', $5)
+        RETURNING *;
         `, [req.session.user_id, param_id, score, date, dateTime])
-         // should test for when user is logged out
         .then(user => {
           res.redirect(`/quizzes/results`)
           })
@@ -191,7 +129,64 @@ module.exports = (db) => {
     });
   });
 
+  router.get("/:id", (req, res) => {
+    console.log(req.params.id)
+    return db.query(`
+    SELECT questions.question, questions.id
+    FROM questions
+    JOIN quizzes ON quizzes.id = quiz_id
+    WHERE quiz_id = $1;
+    `, [req.params.id])
+    .then(result => {
+      let quiz = result.rows;
+      console.log("QUIZ[0]", quiz[0].id)
+      return db.query(`
+        SELECT answers.answer, answers.correct, question_id
+        FROM questions
+        JOIN quizzes ON quizzes.id = quiz_id
+        JOIN answers ON questions.id = question_id
+        WHERE quiz_id = $1;
+      `, [req.params.id])
+     .then (answers => {
+        let answer = answers.rows;
+        console.log("answers",answer);
+        console.log("QUIZ", quiz);
+        let questionsObj = {};
+        let right = [];
+        let param_id = req.params.id
+        console.log("ADDED ID", questionsObj)
+        for (let i = 0; i < quiz.length; i++) {
+          questionsObj[i] = { quiz_id: param_id, question: quiz[i].question }
+          for (let j = 0; j < answer.length; j++) {
+            if (quiz[i].id === answer[j].question_id) {
+              right.push(answer[j].answer)
+              // right[j] = answer[j].answer
+              questionsObj[i].answer = right;
+              // console.log("OBJECT", questionsObj)
+            }
+          } right = [];
+        }
+       console.log("OBJ", questionsObj)
 
+        let templateVars = { questionsObj };
+        console.log("TEMPLATE", templateVars);
+
+        if (req.session.user_id) {
+          templateVars.user = req.session.user_id;
+        } else {
+          templateVars.user = "";
+        }
+
+        res.render("quiz_page", templateVars)
+      })
+
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    });
+  });
 
 
 
