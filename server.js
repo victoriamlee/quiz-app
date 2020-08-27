@@ -44,7 +44,6 @@ const registerRoute = require("./routes/register");
 const loginRoute = require("./routes/login");
 const logoutRoute = require("./routes/logout");
 const quizzesRoute = require("./routes/quiz");
-// const resultsRoute = require("./routes/results");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -55,7 +54,6 @@ app.use("/register", registerRoute(db));
 app.use("/login", loginRoute(db));
 app.use("/logout", logoutRoute(db));
 app.use("/quizzes", quizzesRoute(db));
-// app.use("/quizzes/results", resultsRoute(db));
 
 
 // Home page
@@ -67,7 +65,8 @@ app.get("/", (req, res) => {
   const str1 = `${PORT}`;
   const str2 = "http://localhost:" + str1 + "/quizzes/";
 
-  let query = `SELECT name, description, ('${str2}' || id) as quiz_url FROM quizzes;`;
+  let query = `SELECT name, description, genre, ('${str2}' || id) as quiz_url FROM quizzes
+    WHERE active = true;`;
 
   db.query(query)
       .then(data => {
@@ -75,7 +74,7 @@ app.get("/", (req, res) => {
 
         let quizObj = {};
         for (let i = 0; i < widgets.length; i++) {
-          quizObj[i] = {name: widgets[i].name, description: widgets[i].description, url: widgets[i].quiz_url};
+          quizObj[i] = {name: widgets[i].name, description: widgets[i].description, category: widgets[i].genre, url: widgets[i].quiz_url};
         }
 
         let templateVars = {quizObj};
