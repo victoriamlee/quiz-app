@@ -33,6 +33,13 @@ h1 {
   100%{   color: #000;    }
 }
 
+.failure-message {
+  display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  justify-content: center;
+}
+
 .card-header {
   font-weight: bold;
 }
