@@ -1,17 +1,21 @@
 -- Widgets table seeds here (Example)
 
 -- Insert data into 'quizzes' Table
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
+INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
 (1, 'GK Quiz', 'General Knowledge', 'A brain challenger!', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, '2020-08-23');
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
+INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
+(1, 'Star Wars Trivia', 'Films', 'Test your knowledge of a galaxy far far away', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, '2020-08-28');
+INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
+(1, 'Harry Potter Trivia', 'Films', 'Test you knowledge of the school of wizardry', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, '2020-08-28');
+INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
 (1, 'Hockey Quiz', 'Sports', 'A quiz on world hockey!','url', TRUE, now());
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
-(2, 'Javascript Quiz', 'Programming', 'Check your knowledge on js by taking this quiz','url', TRUE, now());
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Canadian Politics Quiz', 'Politics', 'Do you wanna test your knowledge on Canadian politics?','url', TRUE, now());
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
-(2, 'Hollywod Quiz', 'Art', 'Test your knowledge on hollywood films.','url', TRUE, now());
-INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date) VALUES
+INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
+(2, 'Javascript Quiz', 'Programming', 'How good are you @ js?','url', TRUE, now());
+INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
+(1, 'Canadian Politics Quiz', 'Politics', 'How much do you know about Canadian politics?','url', TRUE, now());
+INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
+(2, 'Hollywod Quiz', 'Art', 'Check your knowledge on hollywood films.','url', TRUE, now());
+INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
 (1, 'Space Quiz', 'Science', 'A quiz for space enthusiasts.','url', TRUE, now());
 
 
@@ -19,6 +23,14 @@ INSERT INTO quizzes (user_id, name, genre, description, photo_url, active, date)
 INSERT INTO questions (quiz_id, question) VALUES (1, 'What is the official name for coronavirus disease?');
 INSERT INTO questions (quiz_id, question) VALUES (1, 'What is the capital of Canada?');
 INSERT INTO questions (quiz_id, question) VALUES (1, 'Which is the longest river in the world?');
+
+INSERT INTO questions (quiz_id, question) VALUES (2, 'Who is Luke Skywalkers father?');
+INSERT INTO questions (quiz_id, question) VALUES (2, 'What is the name of Han Solos ship?');
+INSERT INTO questions (quiz_id, question) VALUES (2, 'Name the title of Star Wars Episode 4');
+
+INSERT INTO questions (quiz_id, question) VALUES (3, 'Who is the half-blood prince?');
+INSERT INTO questions (quiz_id, question) VALUES (3, 'What is the name of the school Harry Potter attended?');
+INSERT INTO questions (quiz_id, question) VALUES (3, 'What sport did Harry Potter play?');
 
 
 -- Insert data into 'answers' Table
@@ -35,6 +47,31 @@ INSERT INTO answers (question_id, answer, correct) VALUES (3, 'Amazon', FALSE);
 INSERT INTO answers (question_id, answer, correct) VALUES (3, 'Yangtze', FALSE);
 INSERT INTO answers (question_id, answer, correct) VALUES (3, 'Yellow River', FALSE);
 
+INSERT INTO answers (question_id, answer, correct) VALUES (4, 'Yoda', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (4, 'Ben Kenobi', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (4, 'Chewbacca', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (4, 'Darth Vader', TRUE);
+INSERT INTO answers (question_id, answer, correct) VALUES (5, 'R2D2', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (5, 'Millenium Falcon', TRUE);
+INSERT INTO answers (question_id, answer, correct) VALUES (5, 'Corellian Corvette', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (5, 'Jabba the Hutt', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (6, 'Phantom Menace', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (6, 'Mandalorian', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (6, 'Force Awakens', TRUE);
+INSERT INTO answers (question_id, answer, correct) VALUES (6, 'A New Hope', FALSE);
+
+INSERT INTO answers (question_id, answer, correct) VALUES (7, 'Harry Potter', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (7, 'Sirius Black', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (7, 'Dumbledore', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (7, 'Severus Snape', TRUE);
+INSERT INTO answers (question_id, answer, correct) VALUES (8, 'Harvard', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (8, 'Beauxbatons Academy of Magic', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (8, 'Hogwarts', TRUE);
+INSERT INTO answers (question_id, answer, correct) VALUES (8, 'Castelobruxo', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (9, 'Table Tennis', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (9, 'Wizards chess', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (9, 'Quidditch', TRUE);
+INSERT INTO answers (question_id, answer, correct) VALUES (9, 'Wrestling', FALSE);
 
 
 -- Insert data into 'quiz_attempts' Table
