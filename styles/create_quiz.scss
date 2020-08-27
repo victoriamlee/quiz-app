@@ -1,0 +1,231 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color:rgb(34, 34, 34);
+
+body {
+  color: $primary-color;
+  // background-color: #EEEEE7;
+}
+
+.title-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+//-------------------------
+//-------CHECKBOX TEMPLATE
+
+$checkbox-background: #fff;
+$checkbox-border: #429E9D;
+$checkbox-checked: $checkbox-border;
+$checkbox-background-checked: yellow;
+
+.checkboxes {
+  margin:0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right:55px;
+}
+
+@mixin vh() {
+  border: 0;
+  // clip: rect(0 0 0 0);
+  // margin:-1;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  // position: absolute;
+  width: 1px;
+}
+
+.label-check {
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+input[type="checkbox"] {
+  @include vh();
+  &:focus {
+    + .label-check {
+      &:before {
+      }
+    }
+  }
+  + .label-check {
+    position: relative;
+    padding: 0.5rem 0 0 2rem;
+    margin-bottom: 1rem;
+    user-select: none;
+    color: $checkbox-background;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1.75rem;
+      height: 1.75rem;
+      border: 2px solid $checkbox-border;
+      border-radius: 0.25rem;
+      background: $checkbox-background;
+      text-align: center;
+      transition: background 200ms ease-out;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      transform: scale(0);
+      transition: transform 200ms ease-out;
+    }
+  }
+}
+
+input[type="checkbox"] {
+  + .label-check {
+    &:after {
+      background-color: transparent;
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0.65rem;
+      top: 0.25rem;
+      width: 0.5rem;
+      height: 1rem;
+      opacity: 0.1;
+      border-bottom: 3px solid $checkbox-checked;
+      border-right: 3px solid $checkbox-checked;
+      transform: rotate(45deg);
+      transition: border-color 0.3s ease;
+    }
+  }
+  &:checked {
+    + .label-check {
+      &:before {
+        content: "";
+      }
+
+      &:after {
+        content: "";
+        opacity: 1;
+      }
+    }
+  }
+}
+//------------------
+//------------------
+
+h1 {
+  padding:20px;
+}
+
+h2 {
+  font-size:1.25em;
+  width:100%;
+  margin:0;
+  padding-top:15px;
+}
+
+h3 {
+  font-size:1em;
+  width:100%;
+  padding-top:25px;
+}
+
+.checkbox-title {
+  color: #429E9D;
+  font-size:22px;
+  padding-right:10px;
+  padding-bottom: 8px;
+}
+
+.qa-container {
+  margin-top:40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width:100%;
+}
+
+.question-container h2 {
+  color: #429E9D;
+}
+.answer-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.answer-container-individual {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.no-outline {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: solid;
+}
+
+.answer_field {
+  width: 100%;
+  margin-left:20px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: solid;
+}
+
+.question_field {
+  width: 100%;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: solid;
+}
+
+.radio-toolbar input[type="radio"] {
+  display: none;
+}
+
+.radio-toolbar label {
+  font-size:20px;
+  width:5rem;
+  margin:10px;
+  color: #605df7;
+  text-align: center;
+  border:3px solid;
+  border-color:#fff;
+  border-radius: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+  background-color: #605df7;
+  border-radius: 3px;
+  border-color:#605df7;
+  color: #fff;
+}
+
+.btn-container {
+  margin-top:20px;
+  padding:10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+// @media only screen and (min-width:700px) {
+//   .radio-toolbar label {
+//     width:20%;
+//   }
+// }

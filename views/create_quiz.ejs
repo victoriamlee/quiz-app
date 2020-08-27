@@ -6,49 +6,139 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/create_quiz.css" type="text/css" />
+
 
     <title>Create Quiz</title>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
+
   </head>
 
   <body>
     <%- include('partials/_header') %>
     <main>
       <form action="/api/widgets/quizzes/new" method="POST">
-        <div>
-          <h1>Create Quiz</h1>
-          <label for="name">Quiz Name</label>
-          <input class="form-control" type="text" name="name" placeholder="Enter name of quiz">
-          <label for="description">Description</label>
-          <input class="form-control" type="text" name="description" placeholder="Short description of your quiz">
+      <div class="title-div">
+        <h1>Create Quiz</h1>
+        <div class="checkboxes">
+          <h3 class="checkbox-title">Public</h3>
+          <input id="a" type="checkbox" name="active" value="TRUE" tabindex="1"/>
+          <label class="label-check" for="a"></label>
+        </div>
+      </div>
 
-          <img src="" style="width:100px; height: 100px;"/> <br><br>
 
-          <label for="question">Question</label>
-          <input class="form-control" type="text" name="question" placeholder="Enter question">
 
-          <label for="answer">Answer A</label>
-          <input type="radio" id="right-answer" name="correct" value="1">
-          <input class="form-control" type="text" name="answer" placeholder="Answer Option">
+        <div class="container">
 
-          <label for="answer">Answer B</label>
-          <input type="radio" id="right-answer" name="correct" value="2">
-          <input class="form-control" type="text" name="answer" placeholder="Answer Option">
+          <label for="name"><h2>Quiz Name</h2></label>
+          <input class="form-control no-outline" type="text" name="name" placeholder="Enter name of quiz">
+          <label for="description"><h2>Description</h2></label>
+          <input class="form-control no-outline" type="text" name="description" placeholder="Short description of your quiz">
 
-          <label for="answer">Answer C</label>
-          <input type="radio" id="right-answer" name="correct" value="3">
-          <input class="form-control" type="text" name="answer" placeholder="Answer Option">
+          <!-- <h2>Add Thumbnail</h2>
+          <img src="" style="width:100px; height: 100px;"/> -->
 
-          <label for="answer">Answer D</label>
-          <input type="radio" id="right-answer" name="correct" value="4">
-          <input class="form-control" type="text" name="answer" placeholder="Answer Option">
+          <section class="qa-container">
+            <div class="question-container">
+              <label for="question1"><h2>Question 1</h2></label>
+              <input class="form-control question_field" type="text" name="question1" placeholder="Enter question">
+            </div>
+              <div class="answer-container radio-toolbar">
+                <h3>Select correct answer</h3>
 
-        </br>
-          <button class="btn btn-primary">Add Question</button>
+                <div class="answer-container-individual">
+                  <input type="radio" id="answer1_q1" name="correct1" value="1" checked>
+                  <label for="answer1_q1">A</label>
+                  <input class="form-control answer_field " type="text" name="answer1" placeholder="">
+                </div>
+                <div class="answer-container-individual">
+                  <input type="radio" id="answer2_q1" name="correct1" value="2">
+                  <label for="answer2_q1">B</label>
+                  <input class="form-control answer_field" type="text" name="answer1" placeholder="">
+                </div>
+                <div class="answer-container-individual">
+                  <input type="radio" id="answer3_q1" name="correct1" value="3">
+                  <label for="answer3_q1">C</label>
+                  <input class="form-control answer_field" type="text" name="answer1" placeholder="">
+                </div>
+                <div class="answer-container-individual">
+                  <input type="radio" id="answer4_q1" name="correct1" value="4">
+                  <label for="answer4_q1">D</label>
+                  <input class="form-control answer_field" type="text" name="answer1" placeholder="">
+                </div>
+              </div>
+            </section>
 
-          <button type="submit" class="btn btn-primary">Publish</button>
+            <section class="qa-container">
+              <div class="question-container">
+                <label for="question2"><h2>Question 2</h2></label>
+                <input class="form-control question_field" type="text" name="question2" placeholder="Enter question">
+              </div>
+                <div class="answer-container radio-toolbar">
+                  <h3>Select correct answer</h3>
+
+                  <div class="answer-container-individual">
+                    <input type="radio" id="answer1_q2" name="correct2" value="1" checked>
+                    <label for="answer1_q2">A</label>
+                    <input class="form-control answer_field " type="text" name="answer2" placeholder="">
+                  </div>
+                  <div class="answer-container-individual">
+                    <input type="radio" id="answer2_q2" name="correct2" value="2">
+                    <label for="answer2_q2">B</label>
+                    <input class="form-control answer_field" type="text" name="answer2" placeholder="">
+                  </div>
+                  <div class="answer-container-individual">
+                    <input type="radio" id="answer3_q2" name="correct2" value="3">
+                    <label for="answer3_q2">C</label>
+                    <input class="form-control answer_field" type="text" name="answer2" placeholder="">
+                  </div>
+                  <div class="answer-container-individual">
+                    <input type="radio" id="answer4_q2" name="correct2" value="4">
+                    <label for="answer4_q2">D</label>
+                    <input class="form-control answer_field" type="text" name="answer2" placeholder="">
+                  </div>
+                </div>
+              </section>
+
+              <section class="qa-container">
+                <div class="question-container">
+                  <label for="question3"><h2>Question 3</h2></label>
+                  <input class="form-control question_field" type="text" name="question3" placeholder="Enter question">
+                </div>
+                  <div class="answer-container radio-toolbar">
+                    <h3>Select correct answer</h3>
+
+                    <div class="answer-container-individual">
+                      <input type="radio" id="answer1_q3" name="correct3" value="1" checked>
+                      <label for="answer1_q3">A</label>
+                      <input class="form-control answer_field " type="text" name="answer3" placeholder="">
+                    </div>
+                    <div class="answer-container-individual">
+                      <input type="radio" id="answer2_q3" name="correct3" value="2">
+                      <label for="answer2_q3">B</label>
+                      <input class="form-control answer_field" type="text" name="answer3" placeholder="">
+                    </div>
+                    <div class="answer-container-individual">
+                      <input type="radio" id="answer3_q3" name="correct3" value="3">
+                      <label for="answer3_q3">C</label>
+                      <input class="form-control answer_field" type="text" name="answer3" placeholder="">
+                    </div>
+                    <div class="answer-container-individual">
+                      <input type="radio" id="answer4_q3" name="correct3" value="4">
+                      <label for="answer4_q3">D</label>
+                      <input class="form-control answer_field" type="text" name="answer3" placeholder="">
+                    </div>
+                  </div>
+                </section>
+
+          <div class='btn-container'>
+            <button type="submit" class="btn btn-primary">Publish</button>
+          </div>
         </div>
       </form>
     </main>

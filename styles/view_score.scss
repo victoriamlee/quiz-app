@@ -1,0 +1,79 @@
+
+
+h1 {
+  text-align: center;
+  font-weight: 800;
+}
+
+#myTextBox {
+  display: flex;
+  justify-content: center;
+
+}
+
+#score-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+.blinking{
+  display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  justify-content: center;
+  animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+  0%{     color: #000;    }
+  49%{    color: blue; }
+  60%{    color: yellowgreen; }
+  99%{    color:transparent;  }
+  100%{   color: #000;    }
+}
+
+.failure-message {
+  display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  justify-content: center;
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+.card border-dark mb-3 {
+  max-width: 18rem;
+}
+
+.card-title {
+  font-weight: bold;
+  text-align: center;
+  color: darkgrey;
+}
+
+.card-text {
+  font-size: 30px;
+  font-weight: 500px;
+  text-align: center;
+}
+
+#pass {
+  color: green;
+}
+
+#fail {
+  color: red;
+}
+
+#copy-link {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: rgb(21, 154, 199);
+}
