@@ -11,6 +11,12 @@ INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time
 
 
 INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 1, 3);
+INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 2, 4);
+INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 3, 5);
+INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 4, 3);
+INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 5, 2);
+
+
 INSERT INTO widgets (name, user_id) VALUES ('Sprockets', 1);
 INSERT INTO widgets (name, user_id) VALUES ('Chains', 2);
 INSERT INTO widgets (name, user_id) VALUES ('Bearings', 2);
