@@ -72,9 +72,6 @@ module.exports = (db) => {
 
 
 
-
-
-
   router.post("/:id/results", (req, res) => {
     console.log(req.params.id)
     return db.query(`
@@ -126,8 +123,25 @@ module.exports = (db) => {
         }
         score = `${count}/${input.length}`
         console.log(score);
-        res.redirect(`/quizzes/${param_id}/results`)
 
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        console.log("DATE", date);
+
+
+        return db.query(`
+        INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time)
+        VALUES ($1,$2,$3,$4, '2020-08-24T08:05:00.000Z', '2018-08-24T08:21:20.000Z');
+        `, [req.session.user_id, param_id, score, date])
+         // should test for when user is logged out
+        .then(user => {
+          res.redirect(`/quizzes/${param_id}/results`)
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .json({ error: err.message });
+          });
       })
       .catch(err => {
         res
@@ -135,9 +149,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   })
-
-
-
 
 
 
