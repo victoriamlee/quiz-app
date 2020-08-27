@@ -12,7 +12,7 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     return db.query(`
-      SELECT quiz_attempts.*, quizzes.*
+      SELECT quiz_attempts.*, quizzes.name
       FROM quiz_attempts
       JOIN quizzes ON quiz_id = quizzes.id
       WHERE quiz_attempts.user_id = $1
@@ -22,7 +22,8 @@ module.exports = (db) => {
       const queryData = data.rows;
       let quizObj = {};
         for (let i = 0; i < queryData.length; i++) {
-          quizObj[i] = {name: queryData[i].name, endTime: queryData[i].end_time, score: queryData[i].results};
+          quizObj[i] = {name: queryData[i].name, endTime: queryData[i].end_time,
+            attemptId: queryData[i].id, score: queryData[i].results};
         }
       let templateVars = {quizObj};
 
