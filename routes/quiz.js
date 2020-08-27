@@ -82,20 +82,20 @@ module.exports = (db) => {
         WHERE quiz_id = $1
         ORDER BY question_id;
       `, [req.params.id])
-      .then((results) => {
-        const working = results.rows;
+      .then(data => {
+        const queryData = data.rows;
         let param_id = req.params.id
-        console.log("WORKING:", working)
+        console.log("queryData:", queryData)
         // let i = 0;
         console.log("REQ.BODY", req.body)
         let arr = [];
         let input = [];
-        for (let i = 0; i < working.length; i++) {
-          // console.log("IDK", working[i].question_id)
+        for (let i = 0; i < queryData.length; i++) {
+          // console.log("IDK", queryData[i].question_id)
           // console.log("ARRAY", arr)
-          for (let j = 0; j < working.length; j++) {
-            if (working[i].question_id === working[j].question_id) {
-              arr.push(working[j].correct)
+          for (let j = 0; j < queryData.length; j++) {
+            if (queryData[i].question_id === queryData[j].question_id) {
+              arr.push(queryData[j].correct)
             }
 
           }
