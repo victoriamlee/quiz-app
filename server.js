@@ -44,8 +44,6 @@ const registerRoute = require("./routes/register");
 const loginRoute = require("./routes/login");
 const logoutRoute = require("./routes/logout");
 const quizzesRoute = require("./routes/quiz");
-const resultsRoute = require("./routes/results");
-const viewScoreRoute = require("./routes/view_score");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -56,8 +54,6 @@ app.use("/register", registerRoute(db));
 app.use("/login", loginRoute(db));
 app.use("/logout", logoutRoute(db));
 app.use("/quizzes", quizzesRoute(db));
-app.use("/quizzes/results", resultsRoute(db));
-app.use("/quizzes", viewScoreRoute(db));
 
 
 // Home page
