@@ -72,7 +72,7 @@ module.exports = (db) => {
 
 
 
-  router.post("/:id/results", (req, res) => {
+  router.post("/results", (req, res) => {
     console.log(req.params.id)
     return db.query(`
         SELECT answers.answer, answers.correct, question_id
@@ -121,21 +121,29 @@ module.exports = (db) => {
             count += 1;
           }
         }
-        score = `${count}/${input.length}`
-        console.log(score);
+        // score = `${count}/${input.length}`
+        score = Math.round(count / input.length * 100);
+        console.log("SCORE:", score);
 
+        // gets current date
         let today = new Date();
         let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         console.log("DATE", date);
 
+        // gets current time
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let dateTime = date+'T'+time+'.000Z';
+        console.log("CURRENT TIME", dateTime);
+
+
 
         return db.query(`
         INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time)
-        VALUES ($1,$2,$3,$4, '2020-08-24T08:05:00.000Z', '2018-08-24T08:21:20.000Z');
-        `, [req.session.user_id, param_id, score, date])
+        VALUES ($1,$2,$3,$4, '2020-08-24T08:05:00.000Z', $5);
+        `, [req.session.user_id, param_id, score, date, dateTime])
          // should test for when user is logged out
         .then(user => {
-          res.redirect(`/quizzes/${param_id}/results`)
+          res.redirect(`/quizzes/results`)
           })
           .catch(err => {
             res
@@ -152,7 +160,7 @@ module.exports = (db) => {
 
 
 
-  router.get("/:id/results", (req, res) => {
+  router.get("/results", (req, res) => {
     return db.query(`
       SELECT quiz_attempts.*, quizzes.*
       FROM quiz_attempts
