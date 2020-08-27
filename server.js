@@ -69,7 +69,8 @@ app.get("/", (req, res) => {
   const str1 = `${PORT}`;
   const str2 = "http://localhost:" + str1 + "/quizzes/";
 
-  let query = `SELECT name, description, genre, ('${str2}' || id) as quiz_url FROM quizzes;`;
+  let query = `SELECT name, description, genre, ('${str2}' || id) as quiz_url FROM quizzes
+    WHERE active = true;`;
 
   db.query(query)
       .then(data => {
