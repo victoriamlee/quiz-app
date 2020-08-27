@@ -25,7 +25,6 @@ module.exports = (db) => {
       });
   });
 
-
   //GET --- CREATE QUIZ
   router.get("/quizzes/new", (req, res) => {
     let templateVars = {};
@@ -39,54 +38,79 @@ module.exports = (db) => {
 
   //POST --- CREATE QUIZ
   router.post("/quizzes/new", (req, res) => {
-
+    // if (!req.body.name | !req.body.description ) {
+    //   res.status(400);
+    //   res.redirect(`/api/widgets/quizzes/new`);
+    // }
+    console.log(req.body);
     const name = req.body.name;
     const description = req.body.description;
-    const question = req.body.question;
-    const correct = req.body.correct;
+    const q1 = {
+      question: req.body.question1,
+      correct: req.body.correct1,
+      answer: req.body.answer1
+    }
+    const q2 = {
+      question: req.body.question2,
+      correct: req.body.correct2,
+      answer: req.body.answer2
+    }
+    const q3 = {
+      question: req.body.question3,
+      correct: req.body.correct3,
+      answer: req.body.answer3
+    }
+    //Inserted req.body values into quizObj to allow for iteration
+    const quizObj = {
+      q1,
+      q2,
+      q3
+    }
 
-    //Insert form elements into quiz table
+    //Insert form elements into quiz table and return quizID
     db.query(`
     INSERT INTO quizzes (owner_id, name, description, photo_url, active, date)
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING id;
-    `, [1, name, description,'somePhotoURL', true, '2020-01-11'])
+    `, [req.session.user_id, name, description,'somePhotoURL', false, '2020-01-11'])
     .then(res => {
-      //Insert form elements and returned quizID into questions table
       const quizID = res.rows[0];
-      db.query(`
-      INSERT INTO questions (quiz_id, question)
-      VALUES ($1, $2)
-      RETURNING id;
-      `, [quizID.id, question])
-      .then(res => {
-        const questionID = res.rows[0];
-        //Iterate through answer array to create insert query
-        //Pass true if radio button value (correct) equals index of answer in array
-        let i = 1;
-        for(let answer of req.body.answer) {
-          let flag = false;
-          if (i === parseInt(correct)) {
-            flag = true;
+      //Iterate through quizObj to insert question with respective answers into their corresponding tables
+      for (let q in quizObj){
+        db.query(`
+        INSERT INTO questions (quiz_id, question)
+        VALUES ($1, $2)
+        RETURNING id;
+        `, [quizID.id, quizObj[q].question])
+        .then(res => {
+          const questionID = res.rows[0];
+          //Iterate through answer array to create insert query
+          //Pass true if radio button value (correct) equals index of answer in array
+          let count = 1;
+          for(let answer of quizObj[q].answer) {
+            let flag = false;
+            if (count === parseInt(quizObj[q].correct)) {
+              flag = true;
+            }
+            db.query(`
+            INSERT INTO answers (question_id, answer, correct)
+            VALUES ($1, $2, $3);
+            `, [questionID.id, answer, flag])
+            .then()
+            .catch(e => console.error(e.stack))
+            count++;
           }
-          db.query(`
-          INSERT INTO answers (question_id, answer, correct)
-          VALUES ($1, $2, $3);
-          `, [questionID.id, answer, flag])
-          .then(() => console.log(`Quiz [ ${name} ] added to [ midterm ] database`))
-          .catch(e => console.error(e.stack))
-          i++;
-        }
-      })
-      .catch(e => console.error(e.stack))
+        })
+        .catch(e => console.error(e.stack))
+      }
+      console.log(`Quiz [ ${name} ] added to [ midterm ] database`)
     })
     .catch(e => console.error(e.stack))
 
+    //Redirect to user's quiz list
     // res.redirect(`/quizzes/${quizzes.id}`);
     res.redirect(`/api/widgets/quizzes/new`);
-    // res.render("create_quiz");
   })
-
 
   return router;
 };
