@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home Page</title>
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/styles/view_score.css" type="text/css" />
+
+    <!-- Inbuilt Script -->
+    <script>
+      function myFunction() {
+        var copyText = document.getElementById("myInput");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+        /* Alert the copied text */
+        alert("Link copied!");
+      }
+    </script>
+  </head>
+
+  <header>
+    <%- include('partials/_header') %>
+  </header>
+
+  <body>
+    <br>
+    <h1>Report Card</h1>
+    <br>
+
+    <div id="score-card">
+      <div class="card border-dark mb-3">
+        <div class="card-body text-secondary">
+          <h5 class="card-title">Candidate Name#</h5>
+          <p class="card-text"><%= userName %></p>
+        </div>
+      </div>
+      <div class="card border-dark mb-3">
+        <div class="card-body text-secondary">
+          <h5 class="card-title">Quiz Name#</h5>
+          <p class="card-text"><%= quizName %></p>
+        </div>
+      </div>
+      <div class="card border-dark mb-3">
+        <div class="card-body text-secondary">
+          <h5 class="card-title">Date of Attempt#</h5>
+          <p class="card-text"><%= attemptDate %></p>
+        </div>
+      </div>
+      <div class="card border-dark mb-3">
+        <div class="card-body text-secondary">
+          <h5 class="card-title">Score Achieved#</h5>
+          <p class="card-text"><%= score %>%</p>
+        </div>
+      </div>
+
+      <div class="card border-dark mb-3">
+        <div class="card-body text-secondary">
+          <h5 class="card-title">Result#</h5>
+          <% if (score >= 70) { %>
+            <p id="pass" class="card-text">Pass</p>
+          <% } else { %>
+            <p id="fail" class="card-text">Fail</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div>
+      <% if (score >= 70) { %>
+        <span class="blinking">Congratulations! You nailed it.</span>
+      <% } %>
+    </div>
+
+    <br>
+
+    <div class="card bg-light mb-3">
+      <div class="card-header">Share your Results!</div>
+      <div id="copy-link">
+        <input type="text" value=<%= link %> id="myInput">
+         <button onclick="myFunction()">Copy URL</button>
+      </div>
+
+      <div class="card-body">
+        <ul>
+          <li><a href="https://www.facebook.com/sharer.php?..." target="blank" rel="noopener noreferrer">Facebook</a></li>
+          <li><a href="https://www.linkedin.com/shareArticle?..." target="blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://twitter.com/intent/tweet?..." target="blank" rel="noopener noreferrer">Twitter</li>
+        </ul>
+      </div>
+    </div>
+
+  </body>
+</html>
