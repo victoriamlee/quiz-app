@@ -65,42 +65,6 @@ router.get("/share", (req, res) => {
 });
 
 
-
-
-// Route to delete a quiz from private quiz list. Requires user login. //To be Implemented
-
-router.post("/myList/:id/delete", (req, res) => {
-  console.log("$$$$$$$$$$$$$", req.params.id,req.session.id);
-  return db.query(`
-    DELETE
-    FROM quizzes
-    WHERE id = $1 and owner_id = $2
-    RETURNING *;`
-  , [req.params.id, req.session.user_id])
-  .then(data => {
-    const queryData = data.rows[0];
-    let quizObj = {quizId: queryData[0].id, name: queryData[0].name, description: queryData[0].description,
-          category: queryData[0].genre, active: queryData[0].active};
-
-    let templateVars = {quizObj};
-
-    if (req.session.user_id) {
-      templateVars.user = req.session.user_id;
-    } else {
-      templateVars.user = "";
-    }
-
-    //res.render("user_quiz_list");
-    res.redirect("/quizzes/myList");
-  })
-  .catch(err => {
-    res
-      .status(500)
-      .json({ error: err.message });
-  });
-});
-
-
 // Route to display private quiz list for a user. Requires user login.
 
 router.get("/myList", (req, res) => {
@@ -138,6 +102,42 @@ router.get("/myList", (req, res) => {
       .json({ error: err.message });
   });
 });
+
+
+// // Route to delete a quiz from private quiz list. Requires user login. //To be Implemented
+
+// router.post("/myList", (req, res) => {
+//   console.log("$$$$$$$$$$$$$", req.params.id,req.session.user_id);
+//   console.log("$$$$$$$$$$$$$", req.params);
+//   return db.query(`
+//     DELETE
+//     FROM quizzes
+//     WHERE id = $1 and owner_id = $2
+//     RETURNING *;`
+//   , [req.params.id, req.session.user_id])
+//   .then(data => {
+//     const queryData = data.rows[0];
+//     let quizObj = {quizId: queryData[0].id, name: queryData[0].name, description: queryData[0].description,
+//           category: queryData[0].genre, active: queryData[0].active};
+
+//     let templateVars = {quizObj};
+
+//     if (req.session.user_id) {
+//       templateVars.user = req.session.user_id;
+//     } else {
+//       templateVars.user = "";
+//     }
+
+//     //res.render("user_quiz_list");
+//     res.redirect("/quizzes/myList");
+//     //res.render("user_quiz_list", templateVars);
+//   })
+//   .catch(err => {
+//     res
+//       .status(500)
+//       .json({ error: err.message });
+//   });
+// });
 
 
 // Route to view_score for a particular quiz attempt. Does not require user login.
