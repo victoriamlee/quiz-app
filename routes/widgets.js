@@ -257,6 +257,7 @@ module.exports = (db) => {
       const quizID = res.rows[0];
       //Iterate through quizObj to insert question with respective answers into their corresponding tables
       for (let q in quizObj){
+        console.log("LOOPING", quizObj[q].question)
         db.query(`
         UPDATE questions
         SET question = $1

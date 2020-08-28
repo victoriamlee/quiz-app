@@ -145,7 +145,7 @@ router.get("/:id/results", (req, res) => {
 
 router.get("/:id", (req, res) => {
   return db.query(`
-    SELECT questions.question, questions.id
+    SELECT questions.question, questions.id, quizzes.name
     FROM questions
     JOIN quizzes ON quizzes.id = quiz_id
     WHERE quiz_id = $1;
@@ -165,7 +165,7 @@ router.get("/:id", (req, res) => {
       let right = [];
       let param_id = req.params.id
       for (let i = 0; i < quiz.length; i++) {
-        questionsObj[i] = { quiz_id: param_id, question: quiz[i].question }
+        questionsObj[i] = { quiz_id: param_id, name: quiz[i].name, question: quiz[i].question }
         for (let j = 0; j < answer.length; j++) {
           if (quiz[i].id === answer[j].question_id) {
             right.push(answer[j].answer)
