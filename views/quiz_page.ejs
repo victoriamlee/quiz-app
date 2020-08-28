@@ -15,7 +15,7 @@
   <h1 class="title"><%= questionsObj[0].name %></h1>
   <% for(let item in questionsObj) { %>
 <!-- <form action="/quizzes/<%= questionsObj.quiz_id %>/results" method="POST"> -->
-<form action="/quizzes/results" method="POST">
+<form action="/quizzes/<%= questionsObj[item].quiz_id %>/results" method="POST">
 <div class="all">
 <div class="body">
   <div class="question bg-white p-3 border-bottom">
@@ -45,9 +45,7 @@
   </div>
 </div>
 <% } %>
-<form method="POST" action="/quizzes/results"></form>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<button type="submit" class="btn btn-primary">Submit</button>
 </div>
 </div>
 </form>
