@@ -2,21 +2,21 @@
 
 -- Insert data into 'quizzes' Table
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'GK Quiz', 'General Knowledge', 'A brain challenger!', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, '2020-08-23');
+(1, 'GK Quiz', 'General Knowledge', 'A brain challenger!', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, now());
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Star Wars Trivia', 'Films', 'Test your knowledge of a galaxy far far away', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, '2020-08-28');
+(2, 'Star Wars Trivia', 'Films', 'Test your knowledge of a galaxy far far away', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, now());
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Harry Potter Trivia', 'Films', 'Test you knowledge of the school of wizardry', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, '2020-08-28');
+(1, 'Harry Potter Trivia', 'Films', 'Test you knowledge of the school of wizardry', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, now());
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Hockey Quiz', 'Sports', 'A quiz on world hockey!','url', TRUE, now());
+(1, 'Hockey Quiz', 'Sports', 'A quiz on world hockey!','url', TRUE, '2020-08-25');
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
-(2, 'Javascript Quiz', 'Programming', 'How good are you @ js?','url', TRUE, now());
+(2, 'Javascript Quiz', 'Programming', 'How good are you @ js?','url', TRUE, '2020-08-26');
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Canadian Politics Quiz', 'Politics', 'How much do you know about Canadian politics?','url', TRUE, now());
+(1, 'Canadian Politics Quiz', 'Politics', 'How much do you know about Canadian politics?','url', TRUE, '2020-08-25');
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
-(2, 'Hollywod Quiz', 'Art', 'Check your knowledge on hollywood films.','url', TRUE, now());
+(2, 'Hollywod Quiz', 'Art', 'Check your knowledge on hollywood films.','url', TRUE, '2020-08-22');
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Space Quiz', 'Science', 'A quiz for space enthusiasts.','url', TRUE, now());
+(1, 'Space Quiz', 'Science', 'A quiz for space enthusiasts.','url', TRUE, '2020-08-20');
 
 
 -- Insert data into 'questions' Table
@@ -95,7 +95,5 @@ INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 5, 2);
 -- INSERT INTO widgets (name, user_id) VALUES ('Chains', 2);
 -- INSERT INTO widgets (name, user_id) VALUES ('Bearings', 2);
 
-
-INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time) VALUES (1, 1, '1/1', '2020-08-24', '2020-08-24T08:05:00.000Z', '2018-08-24T08:21:20.000Z');
 
 INSERT INTO ratings (quiz_id, quiz_attempts_id, rating) VALUES (1, 1, 3);
