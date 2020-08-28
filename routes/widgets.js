@@ -5,6 +5,10 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+require('dotenv').config();
+// Web server config
+const PORT = process.env.PORT || 8080;
+
 const express = require('express');
 const router  = express.Router();
 
@@ -139,8 +143,8 @@ module.exports = (db) => {
     return db.query(`
     SELECT quizzes.name, quizzes.description, quizzes.active, quizzes.genre
     FROM quizzes
-    WHERE quizzes.id = $1;
-    `, [req.params.id])
+    WHERE quizzes.id = $1 AND owner_id = $2
+    `, [req.params.id, req.session.user_id])
     .then((result) => {
       const tempObj = result.rows[0]
       const quizInfoObj = removeAnonymous(tempObj);
@@ -288,6 +292,87 @@ module.exports = (db) => {
     res.redirect(`/quizzes/myList`)
   })
 
+
+
+// Route to delete a quiz from private quiz list. Requires user login.
+
+router.post("/quizzes/:id/delete", (req, res) => {
+  return db.query(`
+    DELETE
+    FROM quizzes
+    WHERE id = $1 and owner_id = $2
+    RETURNING *;`
+  , [req.params.id, req.session.user_id])
+  .then(data => {
+    return db.query(`
+    SELECT id, name, description, genre, active, TO_CHAR(date, 'YYYY-MM-DD') as quiz_date FROM quizzes
+    WHERE owner_id = $1
+    ORDER BY date DESC;`
+  , [req.session.user_id])
+  .then(data => {
+    const queryData = data.rows;
+    let quizObj = {};
+    const str1 = `${PORT}`;
+
+    for (let i = 0; i < queryData.length; i++) {
+      const str2 = queryData[i].id;
+      const str3 = "http://localhost:" + str1 + "/quizzes/" + str2;
+
+      quizObj[i] = {quizId: queryData[i].id, name: queryData[i].name, description: queryData[i].description,
+          category: queryData[i].genre, active: queryData[i].active, date: queryData[i].quiz_date,
+          link: str3};
+     }
+    let templateVars = {quizObj};
+
+    if (req.session.user_id) {
+      templateVars.user = req.session.user_id;
+    } else {
+      templateVars.user = "";
+    }
+
+    res.render("user_quiz_list", templateVars);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+  });
+});
+
+
+
+// Route to get a delete path from private quiz list. Requires user login.
+
+router.get("/quizzes/:id/delete", (req, res) => {
+
+  return db.query(`
+    SELECT name, genre, description
+    FROM quizzes
+    WHERE id = $1 and owner_id = $2;`
+  , [req.params.id, req.session.user_id])
+  .then(data => {
+    const queryData = data.rows[0];
+
+    let quizObj = {quizId: req.params.id, name: queryData.name, description: queryData.description,
+          category: queryData.genre};
+
+    let templateVars = {quizObj};
+
+    if (req.session.user_id) {
+      templateVars.user = req.session.user_id;
+    } else {
+      templateVars.user = "";
+    }
+
+    res.render("delete_quiz", templateVars);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+});
 
   return router;
 };

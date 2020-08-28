@@ -65,7 +65,7 @@
             </form>
           </td>
           <td>
-            <form method="POST" action="/quizzes/myList">
+            <form method="GET" action="/api/widgets/quizzes/<%= quizObj[item].quizId %>/delete">
                 <button type="submit" class="btn btn-outline-danger">Delete</button>
             </form>
           </td>
