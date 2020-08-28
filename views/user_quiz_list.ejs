@@ -47,6 +47,7 @@
           <th scope="col">Category</th>
           <th scope="col">Created On</th>
           <th scope="col">Is_Public</th>
+          <th scope="col">Access URL</th>
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
           <th scope="col">Copy Link</th>
@@ -59,6 +60,7 @@
           <td><%= quizObj[item].category %></td>
           <td><%= quizObj[item].date %></td>
           <td><%= quizObj[item].active %></td>
+          <td><a href="<%= quizObj[item].link %>"</a>Click here</td>
           <td>
             <form method="GET" action="/api/widgets/quizzes/<%= quizObj[item].quizId %>/edit">
                 <button type="submit" class="btn btn-outline-primary">Edit</button>
