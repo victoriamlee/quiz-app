@@ -60,7 +60,7 @@
           <td><%= quizObj[item].date %></td>
           <td><%= quizObj[item].active %></td>
           <td>
-            <form method="GET" action="/quizzes/<%= quizObj[item].quizId %>/edit">
+            <form method="GET" action="/api/widgets/quizzes/<%= quizObj[item].quizId %>/edit">
                 <button type="submit" class="btn btn-outline-primary">Edit</button>
             </form>
           </td>
