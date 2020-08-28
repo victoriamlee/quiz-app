@@ -44,7 +44,7 @@ module.exports = (db) => {
       active = true;
     }
 
-    const genre = 'genre';
+    const genre = req.body.genre;
     const name = req.body.name;
     const description = req.body.description;
     const q1 = {
@@ -120,10 +120,8 @@ module.exports = (db) => {
     })
     .catch(e => console.error(e.stack))
 
-    //Redirect to user's quiz list
-    // res.redirect(`/quizzes/${quizzes.id}`);
+
     res.redirect(`/quizzes/myList`)
-    // res.redirect(`/api/widgets/quizzes/new`);
   })
 
 
@@ -139,7 +137,7 @@ module.exports = (db) => {
     templateVars.quiz = req.params.id;
     //return quiz info using quizID in url
     return db.query(`
-    SELECT quizzes.name, quizzes.description, quizzes.active
+    SELECT quizzes.name, quizzes.description, quizzes.active, quizzes.genre
     FROM quizzes
     WHERE quizzes.id = $1;
     `, [req.params.id])
@@ -150,6 +148,7 @@ module.exports = (db) => {
       templateVars.name = quizInfoObj.name;
       templateVars.description = quizInfoObj.description;
       templateVars.active = quizInfoObj.active;
+      templateVars.genre = quizInfoObj.genre;
 
       //return list of questions from quizID and add to template vars
       return db.query(`
@@ -285,9 +284,8 @@ module.exports = (db) => {
     })
     .catch(e => console.error(e.stack))
 
-    //Redirect to user's quiz list
-    // res.redirect(`/quizzes/${quizzes.id}`);
-    res.redirect(`/api/widgets/quizzes/new`);
+
+    res.redirect(`/quizzes/myList`)
   })
 
 
