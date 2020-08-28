@@ -28,12 +28,17 @@ module.exports = (db) => {
     const name = user.name;
     const email = user.email;
     const password = user.password;
+    if (name === "" || email === "" || password === "") {
+      let templateVars = { user: req.session.user_id, message: "Error: Input can't be blank" };
+      res.render("error", templateVars);
+    } else {
 
     // console.log(emailExist(email))
     return emailExist(email)
     .then(user => {
       if (user) {
-        res.send({error: "email already exists"});
+        let templateVars = { user: req.session.user_id, message: "Error: Email already exists" };
+          res.render("error", templateVars);
       } else {
         return db.query(`
         INSERT INTO users (name, email, password)
@@ -45,12 +50,14 @@ module.exports = (db) => {
           res.redirect('/')
         });
       }
+
     })
     .catch(err => {
       res
         .status(500)
         .json({ error: err.message });
     });
+  }
   })
 
 
