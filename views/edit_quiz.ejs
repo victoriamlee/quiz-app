@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/create_quiz.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/edit_quiz.css" type="text/css" />
 
 
     <title>Edit Quiz</title>
@@ -31,8 +31,7 @@
         </div>
       </div>
 
-
-      <input class="store-quizid" type="text" name="quiz" value="<%= quiz %>">
+        <input id="store" type="text" name="quiz" value="<%= quiz %>">
 
         <div class="container">
 
@@ -40,6 +39,8 @@
           <input class="form-control no-outline" type="text" name="name" value="<%= name %>">
           <label for="description"><h2>Description</h2></label>
           <input class="form-control no-outline" type="text" name="description" value="<%= description %>">
+          <label for="genre"><h2>Genre</h2></label>
+          <input class="form-control no-outline" type="text" name="genre" value="<%= genre %>"">
 
           <!-- <h2>Add Thumbnail</h2>
           <img src="" style="width:100px; height: 100px;"/> -->
