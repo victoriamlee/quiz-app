@@ -5,10 +5,12 @@
   font-weight: 800;
   height: 80px;
   padding: 10px;
-  color: #605df7;
+  color: black;
   font-family: sans-serif;
   direction: ltr;
   behavior: scroll;
+  background-color: #d2d2ff;
+  border-bottom: 1px solid #464650;
 }
 
 
@@ -25,23 +27,31 @@
   display: flex;
   align-self: auto;
   flex-basis: auto;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  border: 2px solid #CCCCFF;
+  // font-family: "Comic Sans MS", cursive, sans-serif;
   font-variant: small-caps;
   font-weight: 900;
-  font-size: 18pt;
+  font-size: 16pt;
   color: red;
   height: 150px;
   animation-name: example;
   animation-duration: 3s;
   animation-iteration-count: infinite;
+  background-color: #CCCCFF;
+  border-radius:10px/0%;
 }
 
 @keyframes example {
-  0%   {color: rgb(138, 113, 226);}
-  25%  {color: rgb(151, 35, 113);}
-  50%  {color: rgb(230, 189, 56);}
-  75%  {color: rgb(54, 54, 233);}
-  100% {color: rgb(233, 190, 74);}
+  // 0%   {color: rgb(138, 113, 226);}
+  // 25%  {color: rgb(156, 66, 216);}
+  // 50%  {color: rgb(120, 48, 214);}
+  // 75%  {color: rgb(109, 31, 199);}
+  // 100% {color: rgb(58, 6, 126);}
+  0%   {color: #464650;}
+  25%  {color: #464650;}
+  50%  {color: #464650;}
+  75%  {color: #464650;}
+  100% {color: #464650;}
 }
 
 
