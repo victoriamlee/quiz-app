@@ -122,7 +122,8 @@ module.exports = (db) => {
 
     //Redirect to user's quiz list
     // res.redirect(`/quizzes/${quizzes.id}`);
-    res.redirect(`/api/widgets/quizzes/new`);
+    res.redirect(`/quizzes/myList`)
+    // res.redirect(`/api/widgets/quizzes/new`);
   })
 
 
