@@ -60,12 +60,12 @@
           <td><%= quizObj[item].date %></td>
           <td><%= quizObj[item].active %></td>
           <td>
-            <form method="GET" action="/">
+            <form method="GET" action="/quizzes/myList">
                 <button type="submit" class="btn btn-outline-primary">Edit</button>
             </form>
           </td>
           <td>
-            <form method="POST" action="/myList/<%= quizObj[item].quizId %>/delete">
+            <form method="GET" action="/quizzes/myList">
                 <button type="submit" class="btn btn-outline-danger">Delete</button>
             </form>
           </td>
