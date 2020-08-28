@@ -138,13 +138,18 @@ module.exports = (db) => {
     templateVars.quiz = req.params.id;
     //return quiz info using quizID in url
     return db.query(`
-    SELECT quizzes.name, quizzes.description, quizzes.active
+    SELECT quizzes.name, quizzes.description, quizzes.active, quizzes.owner_id
     FROM quizzes
     WHERE quizzes.id = $1;
     `, [req.params.id])
     .then((result) => {
       const tempObj = result.rows[0]
+      // console.log(quizInfoObj);
       const quizInfoObj = removeAnonymous(tempObj);
+      if (quizInfoObj.owner_id !== req.session.user_id) {
+        let templateVars = { user: req.session.user_id, message: "Error: You don't have access" };
+        res.render("error", templateVars);
+      } else {
 
       templateVars.name = quizInfoObj.name;
       templateVars.description = quizInfoObj.description;
@@ -188,6 +193,7 @@ module.exports = (db) => {
         res.render("edit_quiz", templateVars);
       })
      })
+    }
     })
 
   });
