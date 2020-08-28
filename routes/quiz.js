@@ -71,7 +71,7 @@ router.get("/myList", (req, res) => {
   return db.query(`
     SELECT id, name, description, genre, active, TO_CHAR(date, 'YYYY-MM-DD') as quiz_date FROM quizzes
     WHERE owner_id = $1
-    ORDER BY date DESC;`
+    ORDER BY date DESC, id DESC;`
   , [req.session.user_id])
   .then(data => {
     const queryData = data.rows;

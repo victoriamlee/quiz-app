@@ -66,7 +66,8 @@ app.get("/", (req, res) => {
   const str2 = "http://localhost:" + str1 + "/quizzes/";
 
   let query = `SELECT name, description, genre, ('${str2}' || id) as quiz_url FROM quizzes
-    WHERE active = true;`;
+    WHERE active = true
+    ORDER BY DATE desc, ID desc;`;
 
   db.query(query)
       .then(data => {
