@@ -141,8 +141,8 @@ module.exports = (db) => {
     return db.query(`
     SELECT quizzes.name, quizzes.description, quizzes.active
     FROM quizzes
-    WHERE quizzes.id = $1;
-    `, [req.params.id])
+    WHERE quizzes.id = $1 AND owner_id = $2
+    `, [req.params.id, req.session.user_id])
     .then((result) => {
       const tempObj = result.rows[0]
       const quizInfoObj = removeAnonymous(tempObj);
