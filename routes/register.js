@@ -32,8 +32,6 @@ module.exports = (db) => {
       let templateVars = { user: req.session.user_id, message: "Error: Input can't be blank" };
       res.render("error", templateVars);
     } else {
-
-    // console.log(emailExist(email))
     return emailExist(email)
     .then(user => {
       if (user) {
@@ -59,34 +57,6 @@ module.exports = (db) => {
     });
   }
   })
-
-
-
-
-          // console.log(emailExist(email))
-          // if (emailExist(email) === null) {
-          //     // DOESN'T WORK
-          //     return db.query(`
-          //     INSERT INTO users (name, email, password)
-          //     VALUES ($1,$2,$3);
-          //     `, [name,email,password])
-          //     .then(() => {
-          //         //DOESN'T WORK
-          //         res.redirect('/api/widgets/quizzes');
-          //       })
-          //       .catch(err => {
-          //           res
-          //             .status(500)
-          //             .json({ error: err.message });
-          //         });
-          //       } else {
-          //           //WORKS
-          //           res.send({error: "email already exists"});
-          //           return;
-          //         }
-          //       })
-
-
 
   return router;
 };

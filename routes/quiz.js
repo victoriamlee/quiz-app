@@ -150,15 +150,12 @@ router.post("/:id/results", (req, res) => {
     ORDER BY question_id;
   `, [req.params.id])
   .then(data => {
-    // user can't submit if not logged in
+    // if user is logged in or not
     if (!req.session.user_id) {
       let templateVars = { user: req.session.user_id, message: "Error: You need to login to submit the quiz" };
       res.render("error", templateVars);
     } else {
-
-    console.log("EMPTY", req.body);
     const queryData = data.rows;
-    console.log("DATA", queryData)
     let param_id = req.params.id;
     let input = [];
     let questionIndex = 0;
@@ -170,7 +167,8 @@ router.post("/:id/results", (req, res) => {
       input.push(queryData[combinedIndex ].correct);
       questionIndex++;
     }
-    console.log("QUESTIONS", queryData.length / 4)
+
+    // if user didn't answer all the questions
     if (input.length !== queryData.length / 4) {
       let templateVars = { user: req.session.user_id, message: "Error: You need to answer all the questions" };
       res.render("error", templateVars);
@@ -198,7 +196,6 @@ router.post("/:id/results", (req, res) => {
       INSERT INTO quiz_attempts (user_id, quiz_id, results, date, start_time, end_time)
       VALUES ($1,$2,$3,$4, '2020-08-24T08:05:00.000Z', $5);
     `, [req.session.user_id, param_id, score, date, dateTime])
-      // should test for when user is logged out
     .then(user => {
       res.redirect(`/quizzes/results`)
     })
