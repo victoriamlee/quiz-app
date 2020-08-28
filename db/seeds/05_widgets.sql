@@ -34,8 +34,8 @@ INSERT INTO answers (question_id, answer, correct) VALUES (5, 'Jabba the Hutt', 
 
 INSERT INTO answers (question_id, answer, correct) VALUES (6, 'Phantom Menace', FALSE);
 INSERT INTO answers (question_id, answer, correct) VALUES (6, 'Mandalorian', FALSE);
-INSERT INTO answers (question_id, answer, correct) VALUES (6, 'Force Awakens', TRUE);
-INSERT INTO answers (question_id, answer, correct) VALUES (6, 'A New Hope', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (6, 'Force Awakens', FALSE);
+INSERT INTO answers (question_id, answer, correct) VALUES (6, 'A New Hope', TRUE);
 
 --Sample Quiz (Harry Potter Trivia)
 INSERT INTO quizzes (owner_id, name, description, photo_url, active, date) VALUES (1, 'Harry Potter Trivia', 'Test you knowledge of the school of wizardry', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, '2020-08-28');

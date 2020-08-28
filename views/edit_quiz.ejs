@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/styles/create_quiz.css" type="text/css" />
 
 
-    <title>Create Quiz</title>
+    <title>Edit Quiz</title>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -21,24 +21,25 @@
   <body>
     <%- include('partials/_header') %>
     <main>
-      <form action="/api/widgets/quizzes/new" method="POST">
+      <form action="/api/widgets/quizzes/:id/edit" method="POST">
       <div class="title-div">
-        <h1>Create Quiz</h1>
+        <h1>Edit Quiz</h1>
         <div class="checkboxes">
           <h3 class="checkbox-title">Public</h3>
-          <input id="a" type="checkbox" name="active" value="true" tabindex="1"/>
+          <input id="a" type="checkbox" name="active" value="true" tabindex="1" <% if (active) {%> checked <% } else { %> <% } %>/>
           <label class="label-check" for="a"></label>
         </div>
       </div>
 
 
+      <input class="store-quizid" type="text" name="quiz" value="<%= quiz %>">
 
         <div class="container">
 
           <label for="name"><h2>Quiz Name</h2></label>
-          <input class="form-control no-outline" type="text" name="name" placeholder="Enter name of quiz">
+          <input class="form-control no-outline" type="text" name="name" value="<%= name %>">
           <label for="description"><h2>Description</h2></label>
-          <input class="form-control no-outline" type="text" name="description" placeholder="Short description of your quiz">
+          <input class="form-control no-outline" type="text" name="description" value="<%= description %>">
 
           <!-- <h2>Add Thumbnail</h2>
           <img src="" style="width:100px; height: 100px;"/> -->
@@ -46,30 +47,30 @@
           <section class="qa-container">
             <div class="question-container">
               <label for="question1"><h2>Question 1</h2></label>
-              <input class="form-control question_field" type="text" name="question1" placeholder="Enter question">
+              <input class="form-control question_field" type="text" name="question1" value="<%= question1.question %>">
             </div>
               <div class="answer-container radio-toolbar">
                 <h3>Select correct answer</h3>
 
                 <div class="answer-container-individual">
-                  <input type="radio" id="answer1_q1" name="correct1" value="1" checked>
+                  <input type="radio" id="answer1_q1" name="correct1" value="1" <% if (answer1_q1.correct) {%> checked <% } else { %> <% } %>>
                   <label for="answer1_q1">A</label>
-                  <input class="form-control answer_field " type="text" name="answer1" placeholder="">
+                  <input class="form-control answer_field " type="text" name="answer1" value="<%= answer1_q1.answer %>">
                 </div>
                 <div class="answer-container-individual">
-                  <input type="radio" id="answer2_q1" name="correct1" value="2">
+                  <input type="radio" id="answer2_q1" name="correct1" value="2" <% if (answer2_q1.correct) {%> checked <% } else { %> <% } %>>
                   <label for="answer2_q1">B</label>
-                  <input class="form-control answer_field" type="text" name="answer1" placeholder="">
+                  <input class="form-control answer_field" type="text" name="answer1" value="<%= answer2_q1.answer %>">
                 </div>
                 <div class="answer-container-individual">
-                  <input type="radio" id="answer3_q1" name="correct1" value="3">
+                  <input type="radio" id="answer3_q1" name="correct1" value="3" <% if (answer3_q1.correct) {%> checked <% } else { %> <% } %>>
                   <label for="answer3_q1">C</label>
-                  <input class="form-control answer_field" type="text" name="answer1" placeholder="">
+                  <input class="form-control answer_field" type="text" name="answer1" value="<%= answer3_q1.answer %>">
                 </div>
                 <div class="answer-container-individual">
-                  <input type="radio" id="answer4_q1" name="correct1" value="4">
+                  <input type="radio" id="answer4_q1" name="correct1" value="4" <% if (answer4_q1.correct) {%> checked <% } else { %> <% } %>>
                   <label for="answer4_q1">D</label>
-                  <input class="form-control answer_field" type="text" name="answer1" placeholder="">
+                  <input class="form-control answer_field" type="text" name="answer1" value="<%= answer4_q1.answer %>">
                 </div>
               </div>
             </section>
@@ -77,30 +78,30 @@
             <section class="qa-container">
               <div class="question-container">
                 <label for="question2"><h2>Question 2</h2></label>
-                <input class="form-control question_field" type="text" name="question2" placeholder="Enter question">
+                <input class="form-control question_field" type="text" name="question2" value="<%= question2.question %>">
               </div>
                 <div class="answer-container radio-toolbar">
                   <h3>Select correct answer</h3>
 
                   <div class="answer-container-individual">
-                    <input type="radio" id="answer1_q2" name="correct2" value="1" checked>
+                    <input type="radio" id="answer1_q2" name="correct2" value="1" <% if (answer1_q2.correct) {%> checked <% } else { %> <% } %>>
                     <label for="answer1_q2">A</label>
-                    <input class="form-control answer_field " type="text" name="answer2" placeholder="">
+                    <input class="form-control answer_field " type="text" name="answer2" value="<%= answer1_q2.answer %>">
                   </div>
                   <div class="answer-container-individual">
-                    <input type="radio" id="answer2_q2" name="correct2" value="2">
+                    <input type="radio" id="answer2_q2" name="correct2" value="2" <% if (answer2_q2.correct) {%> checked <% } else { %> <% } %>>
                     <label for="answer2_q2">B</label>
-                    <input class="form-control answer_field" type="text" name="answer2" placeholder="">
+                    <input class="form-control answer_field" type="text" name="answer2" value="<%= answer2_q2.answer %>">
                   </div>
                   <div class="answer-container-individual">
-                    <input type="radio" id="answer3_q2" name="correct2" value="3">
+                    <input type="radio" id="answer3_q2" name="correct2" value="3" <% if (answer3_q2.correct) {%> checked <% } else { %> <% } %>>
                     <label for="answer3_q2">C</label>
-                    <input class="form-control answer_field" type="text" name="answer2" placeholder="">
+                    <input class="form-control answer_field" type="text" name="answer2" value="<%= answer3_q2.answer %>">
                   </div>
                   <div class="answer-container-individual">
-                    <input type="radio" id="answer4_q2" name="correct2" value="4">
+                    <input type="radio" id="answer4_q2" name="correct2" value="4" <% if (answer4_q2.correct) {%> checked <% } else { %> <% } %>>
                     <label for="answer4_q2">D</label>
-                    <input class="form-control answer_field" type="text" name="answer2" placeholder="">
+                    <input class="form-control answer_field" type="text" name="answer2" value="<%= answer4_q2.answer %>">
                   </div>
                 </div>
               </section>
@@ -108,30 +109,30 @@
               <section class="qa-container">
                 <div class="question-container">
                   <label for="question3"><h2>Question 3</h2></label>
-                  <input class="form-control question_field" type="text" name="question3" placeholder="Enter question">
+                  <input class="form-control question_field" type="text" name="question3" value="<%= question3.question %>">
                 </div>
                   <div class="answer-container radio-toolbar">
                     <h3>Select correct answer</h3>
 
                     <div class="answer-container-individual">
-                      <input type="radio" id="answer1_q3" name="correct3" value="1" checked>
+                      <input type="radio" id="answer1_q3" name="correct3" value="1" <% if (answer1_q3.correct) {%> checked <% } else { %> <% } %>>
                       <label for="answer1_q3">A</label>
-                      <input class="form-control answer_field " type="text" name="answer3" placeholder="">
+                      <input class="form-control answer_field " type="text" name="answer3" value="<%= answer1_q3.answer %>">
                     </div>
                     <div class="answer-container-individual">
-                      <input type="radio" id="answer2_q3" name="correct3" value="2">
+                      <input type="radio" id="answer2_q3" name="correct3" value="2" <% if (answer2_q3.correct) {%> checked <% } else { %> <% } %>>
                       <label for="answer2_q3">B</label>
-                      <input class="form-control answer_field" type="text" name="answer3" placeholder="">
+                      <input class="form-control answer_field" type="text" name="answer3" value="<%= answer2_q3.answer %>">
                     </div>
                     <div class="answer-container-individual">
-                      <input type="radio" id="answer3_q3" name="correct3" value="3">
+                      <input type="radio" id="answer3_q3" name="correct3" value="3" <% if (answer3_q3.correct) {%> checked <% } else { %> <% } %>>
                       <label for="answer3_q3">C</label>
-                      <input class="form-control answer_field" type="text" name="answer3" placeholder="">
+                      <input class="form-control answer_field" type="text" name="answer3" value="<%= answer3_q3.answer %>">
                     </div>
                     <div class="answer-container-individual">
-                      <input type="radio" id="answer4_q3" name="correct3" value="4">
+                      <input type="radio" id="answer4_q3" name="correct3" value="4" <% if (answer4_q3.correct) {%> checked <% } else { %> <% } %>>
                       <label for="answer4_q3">D</label>
-                      <input class="form-control answer_field" type="text" name="answer3" placeholder="">
+                      <input class="form-control answer_field" type="text" name="answer3" value="<%= answer4_q3.answer %>">
                     </div>
                   </div>
                 </section>
