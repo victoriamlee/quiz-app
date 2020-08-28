@@ -4,7 +4,7 @@
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
 (1, 'GK Quiz', 'General Knowledge', 'A brain challenger!', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, now());
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
-(1, 'Star Wars Trivia', 'Films', 'Test your knowledge of a galaxy far far away', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, now());
+(2, 'Star Wars Trivia', 'Films', 'Test your knowledge of a galaxy far far away', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, now());
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
 (1, 'Harry Potter Trivia', 'Films', 'Test you knowledge of the school of wizardry', 'https://images.pexels.com/photos/2099019/pexels-photo-2099019.jpeg', true, now());
 INSERT INTO quizzes (owner_id, name, genre, description, photo_url, active, date) VALUES
