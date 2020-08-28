@@ -29,13 +29,15 @@ module.exports = (db) => {
         if (user) {
           console.log(req.body.password, user.password)
           if (!bcrypt.compareSync(req.body.password, user.password)) {
-          res.send({error: "incorrect password"})
+            let templateVars = { user: req.session.user_id, message: "Error: Email or password is incorrect" };
+            res.render("error", templateVars);
         } else {
           req.session.user_id = user.id;
           res.redirect('/');
         }
       } else {
-        res.send({error: "email does not exist"});
+        let templateVars = { user: req.session.user_id, message: "Error: Email or password is incorrect" };
+        res.render("error", templateVars);
       }
         })
         .catch(err => {
