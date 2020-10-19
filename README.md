@@ -1,5 +1,7 @@
-LHL Node Skeleton
+QuizApp
 =========
+
+A quiz app that let's users create and share quizzes. Users can choose to make their quizzes public or private. Public quizzes are displayed on the homepage.
 
 ## Project Setup
 
