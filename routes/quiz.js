@@ -19,7 +19,9 @@ module.exports = (db) => {
 
 router.get("/results", (req, res) => {
   return db.query(`
-    SELECT quiz_attempts.*, quizzes.name
+    SELECT quiz_attempts.*,
+    TO_CHAR((quiz_attempts.end_time at time zone 'utc' at time zone 'ast'), 'YYYY-MM-DD HH:MI:SS') as local ,
+    quizzes.name
     FROM quiz_attempts
     JOIN quizzes ON quiz_id = quizzes.id
     WHERE quiz_attempts.user_id = $1
@@ -29,7 +31,7 @@ router.get("/results", (req, res) => {
     const queryData = data.rows;
     let quizObj = {};
       for (let i = 0; i < queryData.length; i++) {
-        quizObj[i] = {name: queryData[i].name, endTime: queryData[i].end_time,
+        quizObj[i] = {name: queryData[i].name, endTime: queryData[i].local,
           attemptId: queryData[i].id, score: queryData[i].results};
       }
     let templateVars = {quizObj};
